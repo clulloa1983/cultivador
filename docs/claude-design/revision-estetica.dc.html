@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,700;0,800;1,400&amp;family=Bitter:wght@500;600;700;800&amp;family=Figtree:wght@500;700;800&amp;display=swap">
+<style>
+body{margin:0;background:#f4efe2;color:#1b2417;-webkit-font-smoothing:antialiased}
+a{color:#2c6a2e}
+a:hover{color:#1e4a20}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid var(--focus,#2a5bd7);outline-offset:2px}
+</style>
+</helmet>
+<div style="font-family:'Atkinson Hyperlegible Next',system-ui,sans-serif;font-size:17px;line-height:1.5;padding:48px 24px 96px">
+<div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:72px">
+
+<header style="display:flex;flex-direction:column;gap:16px;max-width:820px">
+  <div style="display:flex;align-items:center;gap:12px">{{ g.logo40 }}<span style="font-family:Bitter,Georgia,serif;font-weight:800;font-size:22px">Cultivador</span></div>
+  <h1 style="margin:0;font-family:Bitter,Georgia,serif;font-size:48px;line-height:1.05;font-weight:800;letter-spacing:-0.02em;text-wrap:balance">Revisión estética y visual</h1>
+  <p style="margin:0;font-size:19px;color:#474f41;text-wrap:pretty">Diagnóstico de las capturas a 390 px, dos direcciones visuales, mockups de la dirección recomendada en tema claro y oscuro, tokens listos para pegar y un plan de cambios priorizado.</p>
+  <nav style="display:flex;flex-wrap:wrap;gap:8px">
+    <a href="#diagnostico" style="padding:8px 14px;border:2px solid #7a725f;border-radius:999px;text-decoration:none;color:#1b2417;font-weight:700">1 · Diagnóstico</a>
+    <a href="#direcciones" style="padding:8px 14px;border:2px solid #7a725f;border-radius:999px;text-decoration:none;color:#1b2417;font-weight:700">2 · Direcciones</a>
+    <a href="#mockups" style="padding:8px 14px;border:2px solid #7a725f;border-radius:999px;text-decoration:none;color:#1b2417;font-weight:700">3 · Mockups</a>
+    <a href="#tokens" style="padding:8px 14px;border:2px solid #7a725f;border-radius:999px;text-decoration:none;color:#1b2417;font-weight:700">4 · Tokens</a>
+    <a href="#plan" style="padding:8px 14px;border:2px solid #7a725f;border-radius:999px;text-decoration:none;color:#1b2417;font-weight:700">5 · Plan</a>
+  </nav>
+  <div style="padding:14px 16px;background:#ebe4d2;border-radius:14px;font-size:16px;color:#1b2417;display:flex;flex-direction:column;gap:4px">
+    <strong>Supuestos</strong>
+    <span>No llegaron <code>styles.css</code>, <code>index.html</code> ni <code>app.js</code>: los selectores del plan son nombres probables y hay que ajustarlos. Las capturas no muestran una tarjeta en germinación ni en floración, así que en Mis cultivos el Zapallo italiano aparece germinando (día 4) y el Poroto enredadera en floración. En la ficha, el día total del cultivo («de ~65») se deriva de la cosecha estimada.</span>
+  </div>
+</header>
+
+<section id="diagnostico" style="display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:Bitter,Georgia,serif;font-size:22px;font-weight:800;color:#8a4a1f">1</span><h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:34px;font-weight:800;letter-spacing:-0.01em">Diagnóstico</h2></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:22px">Fortalezas que hay que conservar</h3>
+      <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ fortalezas }}" as="f" hint-placeholder-count="5">
+          <li style="display:flex;gap:10px;align-items:flex-start;background:#fffdf7;border:1px solid #d9d0bb;border-radius:14px;padding:12px 14px"><span style="flex:none;width:26px;height:26px;border-radius:999px;background:#e1edd6;color:#1e4a20;display:grid;place-items:center;font-weight:800;font-size:14px">{{ f.n }}</span><span style="text-wrap:pretty">{{ f.t }}</span></li>
+        </sc-for>
+      </ol>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;grid-column:span 2;min-width:0">
+      <h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:22px">Problemas visuales</h3>
+      <div style="display:flex;flex-direction:column;background:#fffdf7;border:1px solid #d9d0bb;border-radius:14px;overflow:hidden">
+        <sc-for list="{{ problemas }}" as="p" hint-placeholder-count="10">
+          <div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 16px;border-top:1px solid #e6dfcd">
+            <div style="flex:none;width:190px;display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
+              <span style="{{ p.sevStyle }}">{{ p.sev }}</span>
+              <span style="font-weight:700;font-size:15px;padding-top:2px">{{ p.pantalla }}</span>
+            </div>
+            <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:2px">
+              <span style="font-weight:700;text-wrap:pretty">{{ p.problema }}</span>
+              <span style="font-size:15px;color:#474f41;text-wrap:pretty">{{ p.porque }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="direcciones" style="display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:Bitter,Georgia,serif;font-size:22px;font-weight:800;color:#8a4a1f">2</span><h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:34px;font-weight:800;letter-spacing:-0.01em">Dos direcciones visuales</h2></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px">
+    <article style="background:#fffdf7;border:2px solid #2c6a2e;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:26px;font-weight:800">A · Cuaderno de huerta</h3><span style="background:#2c6a2e;color:#fff;font-weight:700;font-size:14px;padding:4px 12px;border-radius:999px">✓ Recomendada</span></div>
+      <p style="margin:0;text-wrap:pretty">Papel crema, tinta verde casi negra y colores con significado: verde hoja para crecer y para la acción principal, azul agua para todo lo que es riego, terracota para tierra y almácigo, ámbar solo para avisos. Títulos en Bitter, una slab serif robusta que recuerda las etiquetas de los sobres de semillas y no se adelgaza a pleno sol; texto en Atkinson Hyperlegible Next, diseñada para distinguir letras parecidas con baja visión. Las especies son glifos propios de trazo y mancha plana, con el mismo grosor que los íconos de la interfaz. Tarjetas con borde fino y sombra mínima, como fichas pegadas en un cuaderno.</p>
+      <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px">
+        <sc-for list="{{ paletaA }}" as="c" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:4px"><div style="{{ c.sw }}"></div><span style="font-size:14px;font-weight:700;line-height:1.2">{{ c.n }}</span><span style="font-size:13px;color:#474f41;font-family:ui-monospace,Menlo,monospace">{{ c.hex }}</span></div>
+        </sc-for>
+      </div>
+      <div style="border-top:1px solid #d9d0bb;padding-top:14px;display:flex;flex-direction:column;gap:4px">
+        <span style="font-family:Bitter,Georgia,serif;font-size:30px;font-weight:800;line-height:1.1">Para sembrar en octubre</span>
+        <span style="font-size:17px">Necesita calor y un ciclo largo. Il1 0O rn m · Bitter 800 + Atkinson Hyperlegible Next 400/700</span>
+      </div>
+    </article>
+    <article style="background:#ffffff;border:1px solid #d9d0bb;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:16px">
+      <h3 style="margin:0;font-family:Figtree,system-ui,sans-serif;font-size:26px;font-weight:800">B · Moderna y limpia</h3>
+      <p style="margin:0;text-wrap:pretty">Fondo blanco cálido y grises verdosos, un único verde saturado como acento y nada de crema. Una sola familia, Figtree, en pesos 500 a 800; íconos sólidos redondeados y especies como emojis dentro de círculos de color. Tarjetas planas sin sombra, separadas solo por superficies grises. Es más rápida de implementar y se ve ordenada, pero se parece a muchas apps de productividad, pierde el carácter de huerta y el blanco encandila más al sol.</p>
+      <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px">
+        <sc-for list="{{ paletaB }}" as="c" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:4px"><div style="{{ c.sw }}"></div><span style="font-size:14px;font-weight:700;line-height:1.2">{{ c.n }}</span><span style="font-size:13px;color:#474f41;font-family:ui-monospace,Menlo,monospace">{{ c.hex }}</span></div>
+        </sc-for>
+      </div>
+      <div style="border-top:1px solid #e3e6e2;padding-top:14px;display:flex;flex-direction:column;gap:4px;font-family:Figtree,system-ui,sans-serif">
+        <span style="font-size:30px;font-weight:800;line-height:1.1">Para sembrar en octubre</span>
+        <span style="font-size:17px;font-weight:500">Necesita calor y un ciclo largo. Il1 0O rn m · Figtree 500/800</span>
+      </div>
+    </article>
+  </div>
+  <div style="background:#e1edd6;border-radius:16px;padding:18px 20px;max-width:900px">
+    <strong style="font-family:Bitter,Georgia,serif;font-size:19px">Por qué A.</strong>
+    <span style="text-wrap:pretty"> Conserva lo que ya funciona (crema, verde, tierra, contraste alto) y le da personalidad sin depender del teléfono. Separar el riego en azul resuelve el exceso de verde suave: el verde vuelve a significar «crece» y «acción principal». Atkinson Hyperlegible Next mejora la lectura a pleno sol, que es el contexto real de uso. El costo es moderado: tokens, dos fuentes autoalojadas y ocho glifos SVG.</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:22px">Iconografía de especies</h3>
+      <p style="margin:0;text-wrap:pretty">Los emojis 3D se ven distintos en cada sistema y chocan con los íconos de trazo. Propuesta: glifos en cuadrícula de 32 px, contorno de 1,6 px en color tinta y una mancha de color plano por especie, sin degradados. En tema oscuro el contorno pasa a claro y funcionan como calcomanías. Siempre van con su nombre al lado, así el color nunca es la única pista. Estos son bocetos de dirección; un set final conviene encargarlo o redibujarlo con más cuidado.</p>
+      <div style="{{ lightVars }}">
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
+          <sc-for list="{{ glifos }}" as="gl" hint-placeholder-count="8">
+            <div style="background:#fffdf7;border:1px solid #d9d0bb;border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center"><div style="width:64px;height:64px;border-radius:16px;background:#ebe4d2;display:grid;place-items:center">{{ gl.g }}</div><span style="font-size:14px;font-weight:700;line-height:1.2">{{ gl.n }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:22px">Estado vacío</h3>
+      <p style="margin:0;text-wrap:pretty">Los mismos glifos, agrupados sobre una línea de tierra, en lugar de un solo emoji en un cuadro verde. El borde punteado se reemplaza por una tarjeta normal: lo punteado se lee como «zona para arrastrar».</p>
+      <div style="{{ lightVars }}">
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px 20px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;max-width:390px;color:var(--ink)">
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div style="display:flex;align-items:flex-end;gap:2px">{{ g.lechuga56 }}{{ g.tomate64 }}{{ g.poroto_en56 }}</div>
+            <div style="width:200px;height:10px;border-radius:999px 999px 4px 4px;background:var(--earth);margin-top:-4px"></div>
+          </div>
+          <h4 style="margin:6px 0 0;font-family:Bitter,Georgia,serif;font-size:24px">¡Comienza tu huerta!</h4>
+          <p style="margin:0;color:var(--ink-2);text-wrap:pretty">Registra lo que sembraste para ver su etapa, anotar riegos y saber cuándo cosechar.</p>
+          <button style="height:48px;padding:0 22px;border:0;border-radius:999px;background:var(--primary);color:var(--on-primary);font-family:inherit;font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px">{{ i.plus }}Agregar cultivo</button>
+          <a href="#" style="min-height:44px;display:flex;align-items:center;font-weight:700;color:var(--primary)">Ver la guía</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mockups" style="display:flex;flex-direction:column;gap:56px">
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:Bitter,Georgia,serif;font-size:22px;font-weight:800;color:#8a4a1f">3</span><h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:34px;font-weight:800;letter-spacing:-0.01em">Mockups · Cuaderno de huerta</h2></div>
+    <p style="margin:0;color:#474f41;max-width:760px">Pantallas completas a 390 px. «Regué hoy», las plagas de la ficha y el tipo de entrada del diálogo responden al toque.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+    <div style="flex:1 1 260px;max-width:330px;display:flex;flex-direction:column;gap:10px">
+      <h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:26px">Inicio</h3>
+      <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;text-wrap:pretty">
+        <li>El riego es lo primero, en una sola tarjeta con filas, ordenado por urgencia. Lo atrasado lleva ícono y texto, no solo amarillo.</li>
+        <li>«Regué hoy» pasa a botón compacto a la derecha, en azul agua. Al tocarlo queda un ✓ y la fila dice «Regado hoy».</li>
+        <li>La variedad o ubicación baja a una segunda línea gris: el nombre se lee primero.</li>
+        <li>Los 3 indicadores quedan en 2 (el de días sin regar ya está en la lista). El respaldo baja a una franja neutra.</li>
+        <li>Cosechas con la cuenta regresiva alineada a la derecha; siembras en cuadrícula de 2 columnas.</li>
+        <li>Microcopy nuevo: el título «2 cultivos piden agua» cuenta solo los atrasados; pasa a «Nada atrasado hoy» y, con todo regado, a «Todo regado por hoy».</li>
+      </ul>
+    </div>
+    <sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+      <div style="display:flex;flex-direction:column;gap:10px;flex:none">
+        <span style="font-weight:700;font-size:15px;color:#474f41">{{ t.label }}</span>
+        <div style="{{ t.vars }}">
+          <div style="width:390px;position:relative;background:var(--bg);color:var(--ink);border-radius:32px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px -24px rgba(40,30,10,.4);display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 6px 6px 16px;background:var(--surface);border-bottom:1px solid var(--line)">
+              <div style="display:flex;align-items:center;gap:8px">{{ g.logo }}<span style="font-family:Bitter,Georgia,serif;font-weight:800;font-size:21px">Cultivador</span></div>
+              <button aria-label="Ajustes" style="width:48px;height:48px;border:0;border-radius:999px;background:transparent;color:var(--ink);display:grid;place-items:center">{{ i.ajustes }}</button>
+            </div>
+            <div style="padding:20px 16px 32px;display:flex;flex-direction:column;gap:28px">
+              <div>
+                <h1 style="margin:0;font-family:Bitter,Georgia,serif;font-size:30px;font-weight:800;line-height:1.15">Hola</h1>
+                <p style="margin:2px 0 0;color:var(--ink-2)">Martes, 6 de octubre · Primavera</p>
+              </div>
+              <section style="background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-1);overflow:hidden">
+                <div style="padding:16px 16px 14px;display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;align-items:center;gap:6px;color:var(--water)">{{ i.drop18 }}<span style="font-weight:700;font-size:15px;color:var(--ink-2)">Riego</span></div>
+                  <h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:24px;font-weight:800;line-height:1.2">{{ riegoTitulo }}</h2>
+                </div>
+                <sc-for list="{{ riego }}" as="r" hint-placeholder-count="5">
+                  <div style="display:grid;grid-template-columns:40px minmax(0,1fr) auto;column-gap:12px;row-gap:8px;align-items:center;padding:12px 16px;border-top:1px solid var(--line)">
+                    <div style="width:40px;height:40px;border-radius:12px;background:var(--surface-2);display:grid;place-items:center">{{ r.glyph }}</div>
+                    <div style="min-width:0;display:flex;flex-direction:column">
+                      <span style="font-weight:700;line-height:1.25">{{ r.name }}</span>
+                      <sc-if value="{{ r.place }}" hint-placeholder-val="{{ false }}"><span style="font-size:15px;color:var(--ink-2);line-height:1.3">{{ r.place }}</span></sc-if>
+                    </div>
+                    <sc-if value="{{ r.notDone }}" hint-placeholder-val="{{ true }}"><button onClick="{{ r.onWater }}" style="height:48px;padding:0 14px 0 12px;border-radius:999px;border:0;background:var(--water-soft);color:var(--on-water-soft);font-family:inherit;font-size:16px;font-weight:700;display:flex;align-items:center;gap:6px;white-space:nowrap">{{ i.drop18 }}Regué hoy</button></sc-if>
+                    <sc-if value="{{ r.done }}" hint-placeholder-val="{{ false }}"><button onClick="{{ r.onUndo }}" aria-label="Deshacer riego" title="Deshacer" style="justify-self:end;width:48px;height:48px;border-radius:999px;border:0;background:var(--water);color:var(--surface);display:grid;place-items:center">{{ i.check }}</button></sc-if>
+                    <div style="grid-column:2 / 4;display:flex">
+                      <sc-if value="{{ r.showUrgent }}" hint-placeholder-val="{{ false }}"><span style="display:flex;gap:6px;align-items:center;padding:4px 10px;border-radius:8px;background:var(--sun);color:var(--on-sun);font-size:15px;font-weight:700;line-height:1.3">{{ i.alert16 }}{{ r.status }}</span></sc-if>
+                      <sc-if value="{{ r.showPlain }}" hint-placeholder-val="{{ true }}"><span style="font-size:15px;color:var(--ink-2);line-height:1.3">{{ r.status }}</span></sc-if>
+                      <sc-if value="{{ r.done }}" hint-placeholder-val="{{ false }}"><span style="display:flex;align-items:center;gap:4px;font-size:15px;font-weight:700;color:var(--on-water-soft)">{{ i.check16 }}Regado hoy</span></sc-if>
+                    </div>
+                  </div>
+                </sc-for>
+                <div style="padding:12px 16px 16px;border-top:1px solid var(--line)">
+                  <button onClick="{{ waterAll }}" style="width:100%;height:48px;border-radius:999px;border:2px solid var(--line-strong);background:transparent;color:var(--ink);font-family:inherit;font-size:17px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px">{{ i.drop18 }}Regué todos</button>
+                </div>
+              </section>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:15px;font-weight:700;color:var(--ink-2)">Cultivos activos</span>
+                  <span style="font-family:Bitter,Georgia,serif;font-size:30px;font-weight:800;line-height:1.1">6</span>
+                </div>
+                <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:15px;font-weight:700;color:var(--ink-2)">Próxima cosecha</span>
+                  <span style="font-family:Bitter,Georgia,serif;font-size:30px;font-weight:800;line-height:1.1;color:var(--primary)">¡Ya!</span>
+                  <span style="font-size:15px;line-height:1.3">Lechuga · Macetero cocina</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--surface-2)">
+                <span style="color:var(--earth);flex:none;padding-top:2px">{{ i.download }}</span>
+                <div style="display:flex;flex-direction:column;align-items:flex-start;font-size:15px;line-height:1.4">
+                  <span>Aún no respaldas tus datos. Si se limpia el navegador, se pierden.</span>
+                  <a href="#" style="min-height:44px;display:flex;align-items:center;font-weight:700;font-size:16px;color:var(--ink)">Hacer un respaldo</a>
+                </div>
+              </div>
+              <section style="display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;gap:8px;color:var(--earth)">{{ i.basket }}<h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:21px;font-weight:700;color:var(--ink)">Próximas cosechas</h2></div>
+                <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-1);overflow:hidden">
+                  <sc-for list="{{ cosechas }}" as="c" hint-placeholder-count="5">
+                    <sc-if value="{{ c.notFirst }}" hint-placeholder-val="{{ true }}"><div style="height:1px;background:var(--line);margin-left:68px"></div></sc-if>
+                    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px">
+                      <div style="width:40px;height:40px;border-radius:12px;background:var(--surface-2);display:grid;place-items:center;flex:none">{{ c.glyph }}</div>
+                      <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+                        <span style="font-weight:700;line-height:1.25">{{ c.name }}</span>
+                        <span style="font-size:15px;color:var(--ink-2);line-height:1.3">{{ c.when }}</span>
+                      </div>
+                      <sc-if value="{{ c.ya }}" hint-placeholder-val="{{ false }}"><span style="flex:none;padding:4px 12px;border-radius:999px;background:var(--primary);color:var(--on-primary);font-family:Bitter,Georgia,serif;font-weight:800;font-size:17px">¡Ya!</span></sc-if>
+                      <sc-if value="{{ c.notYa }}" hint-placeholder-val="{{ true }}"><div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;line-height:1.05"><span style="font-family:Bitter,Georgia,serif;font-weight:800;font-size:22px">{{ c.days }}</span><span style="font-size:14px;color:var(--ink-2)">días</span></div></sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+              </section>
+              <section style="display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;gap:8px;color:var(--earth)">{{ i.cal }}<h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:21px;font-weight:700;color:var(--ink)">Para sembrar en octubre</h2></div>
+                <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+                  <sc-for list="{{ sembrar }}" as="s" hint-placeholder-count="8">
+                    <a href="#" style="display:flex;gap:10px;align-items:center;padding:10px 12px;min-height:64px;box-sizing:border-box;background:var(--surface);border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink)">
+                      <span style="flex:none">{{ s.glyph }}</span>
+                      <span style="display:flex;flex-direction:column;min-width:0"><span style="font-weight:700;font-size:16px;line-height:1.2">{{ s.name }}</span><span style="font-size:14px;color:var(--ink-2);line-height:1.25">{{ s.how }}</span></span>
+                    </a>
+                  </sc-for>
+                </div>
+                <a href="#" style="min-height:44px;display:flex;align-items:center;gap:4px;font-weight:700;color:var(--primary)">Ver la guía del mes{{ i.chev }}</a>
+              </section>
+            </div>
+            <nav style="display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-top:1px solid var(--line);padding:6px 4px 12px">
+              <sc-for list="{{ navInicio }}" as="n" hint-placeholder-count="4">
+                <sc-if value="{{ n.active }}" hint-placeholder-val="{{ false }}"><a href="#" aria-current="page" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:800"><span style="display:grid;place-items:center;width:60px;height:32px;border-radius:999px;background:var(--primary-soft);color:var(--on-primary-soft)">{{ n.icon }}</span>{{ n.label }}</a></sc-if>
+                <sc-if value="{{ n.inactive }}" hint-placeholder-val="{{ true }}"><a href="#" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;color:var(--ink-2);text-decoration:none;font-size:14px"><span style="display:grid;place-items:center;width:60px;height:32px">{{ n.icon }}</span>{{ n.label }}</a></sc-if>
+              </sc-for>
+            </nav>
+            <sc-if value="{{ showFold }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;right:0;top:844px;border-top:2px dashed var(--focus);pointer-events:none"><span style="position:absolute;right:8px;top:-26px;background:var(--focus);color:var(--surface);font-size:13px;font-weight:700;padding:2px 8px;border-radius:6px">Primer pantallazo · 844 px</span></div></sc-if>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+    <div style="flex:1 1 260px;max-width:330px;display:flex;flex-direction:column;gap:10px">
+      <h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:26px">Mis cultivos</h3>
+      <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;text-wrap:pretty">
+        <li>Barra y pasos se funden en una sola pista segmentada: cada tramo es una etapa y se llena según el avance.</li>
+        <li>Las etapas pasadas llevan ✓, la actual va en negrita con ●. El estado se lee sin depender del color.</li>
+        <li>Etapa y día en tipografía grande arriba: se ven de un vistazo con la tarjeta a medio brazo.</li>
+        <li>Acciones en una sola fila: «Regué hoy», «Anotar» y «Más» como botón de ícono de 48 px con nombre accesible.</li>
+        <li>Las etiquetas de los pasos suben de ~11 px gris a 14 px en tinta.</li>
+      </ul>
+    </div>
+    <sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+      <div style="display:flex;flex-direction:column;gap:10px;flex:none">
+        <span style="font-weight:700;font-size:15px;color:#474f41">{{ t.label }}</span>
+        <div style="{{ t.vars }}">
+          <div style="width:390px;position:relative;background:var(--bg);color:var(--ink);border-radius:32px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px -24px rgba(40,30,10,.4);display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 6px 6px 16px;background:var(--surface);border-bottom:1px solid var(--line)">
+              <div style="display:flex;align-items:center;gap:8px">{{ g.logo }}<span style="font-family:Bitter,Georgia,serif;font-weight:800;font-size:21px">Cultivador</span></div>
+              <button aria-label="Ajustes" style="width:48px;height:48px;border:0;border-radius:999px;background:transparent;color:var(--ink);display:grid;place-items:center">{{ i.ajustes }}</button>
+            </div>
+            <div style="padding:20px 16px 32px;display:flex;flex-direction:column;gap:16px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+                <h1 style="margin:0;font-family:Bitter,Georgia,serif;font-size:30px;font-weight:800;line-height:1.15">Mis cultivos</h1>
+                <button style="height:48px;padding:0 18px 0 14px;border:0;border-radius:999px;background:var(--primary);color:var(--on-primary);font-family:inherit;font-size:17px;font-weight:700;display:flex;align-items:center;gap:6px">{{ i.plus }}Agregar</button>
+              </div>
+              <div role="tablist" style="display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;background:var(--surface-2);border-radius:999px">
+                <button role="tab" aria-selected="true" style="height:44px;border-radius:999px;border:2px solid var(--line-strong);background:var(--surface);color:var(--ink);font-family:inherit;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px">{{ i.check16 }}Activos (6)</button>
+                <button role="tab" aria-selected="false" style="height:44px;border-radius:999px;border:0;background:transparent;color:var(--ink-2);font-family:inherit;font-size:16px">Archivados (1)</button>
+              </div>
+              <sc-for list="{{ cultivos }}" as="c" hint-placeholder-count="3">
+                <article style="background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-1);padding:16px;display:flex;flex-direction:column;gap:16px">
+                  <div style="display:flex;gap:12px;align-items:center">
+                    <div style="width:52px;height:52px;border-radius:14px;background:var(--surface-2);display:grid;place-items:center;flex:none">{{ c.glyph }}</div>
+                    <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+                      <h3 style="margin:0;font-size:19px;font-weight:800;line-height:1.25">{{ c.name }}</h3>
+                      <span style="font-size:15px;color:var(--ink-2)">{{ c.meta }}</span>
+                    </div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:10px">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:8px">
+                      <div style="display:flex;flex-direction:column;line-height:1.15"><span style="font-size:14px;font-weight:700;color:var(--ink-2)">Etapa</span><span style="font-family:Bitter,Georgia,serif;font-size:22px;font-weight:800">{{ c.stage }}</span></div>
+                      <div style="display:flex;flex-direction:column;align-items:flex-end;line-height:1.15"><span style="font-family:Bitter,Georgia,serif;font-size:22px;font-weight:800">Día {{ c.day }}</span><span style="font-size:14px;color:var(--ink-2)">de ~{{ c.total }}</span></div>
+                    </div>
+                    <div style="{{ c.trackStyle }}">
+                      <sc-for list="{{ c.steps }}" as="s" hint-placeholder-count="4">
+                        <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                          <div style="height:12px;border-radius:999px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line-strong);overflow:hidden"><div style="{{ s.fill }}"></div></div>
+                          <sc-if value="{{ s.done }}" hint-placeholder-val="{{ false }}"><span style="display:flex;align-items:center;gap:3px;font-size:14px;font-weight:700;color:var(--ink-2)">{{ i.check14 }}{{ s.label }}</span></sc-if>
+                          <sc-if value="{{ s.current }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;font-weight:800;color:var(--ink)">● {{ s.label }}</span></sc-if>
+                          <sc-if value="{{ s.future }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--ink-2)">{{ s.label }}</span></sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <p style="margin:0;font-size:16px;line-height:1.45;text-wrap:pretty">{{ c.desc }}<sc-if value="{{ c.link }}" hint-placeholder-val="{{ false }}"> <a href="#" style="color:var(--primary);font-weight:700">{{ c.link }}</a></sc-if></p>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px 16px">
+                    <sc-for list="{{ c.facts }}" as="f" hint-placeholder-count="3">
+                      <span style="display:flex;align-items:center;gap:6px;font-size:15px;color:var(--ink-2)"><span style="color:var(--earth);display:flex">{{ f.icon }}</span>{{ f.text }}</span>
+                    </sc-for>
+                  </div>
+                  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 48px;gap:8px">
+                    <button style="height:48px;border-radius:999px;border:0;background:var(--water-soft);color:var(--on-water-soft);font-family:inherit;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">{{ i.drop18 }}Regué hoy</button>
+                    <button style="height:48px;border-radius:999px;border:2px solid var(--line-strong);background:transparent;color:var(--ink);font-family:inherit;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">{{ i.plus18 }}Anotar</button>
+                    <button aria-label="Más opciones" title="Más" style="width:48px;height:48px;border-radius:999px;border:2px solid var(--line-strong);background:transparent;color:var(--ink);display:grid;place-items:center">{{ i.more }}</button>
+                  </div>
+                </article>
+              </sc-for>
+            </div>
+            <nav style="display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-top:1px solid var(--line);padding:6px 4px 12px">
+              <sc-for list="{{ navCultivos }}" as="n" hint-placeholder-count="4">
+                <sc-if value="{{ n.active }}" hint-placeholder-val="{{ false }}"><a href="#" aria-current="page" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:800"><span style="display:grid;place-items:center;width:60px;height:32px;border-radius:999px;background:var(--primary-soft);color:var(--on-primary-soft)">{{ n.icon }}</span>{{ n.label }}</a></sc-if>
+                <sc-if value="{{ n.inactive }}" hint-placeholder-val="{{ true }}"><a href="#" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;color:var(--ink-2);text-decoration:none;font-size:14px"><span style="display:grid;place-items:center;width:60px;height:32px">{{ n.icon }}</span>{{ n.label }}</a></sc-if>
+              </sc-for>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+    <div style="flex:1 1 260px;max-width:330px;display:flex;flex-direction:column;gap:10px">
+      <h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:26px">Ficha de especie</h3>
+      <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;text-wrap:pretty">
+        <li>Calendario en 3 filas con nombre (siembra, almácigo, trasplante) y celdas de 22 px; cada tipo tiene relleno, puntos o rayas. Octubre va marcado con «hoy».</li>
+        <li>«Cómo sembrar» pasa de 8 cajas a una sola tarjeta tipo tabla, con sol y riego destacados.</li>
+        <li>Vecinas con ✓ y ✕ además del color; las especies con ficha llevan flecha.</li>
+        <li>Plagas como acordeón: se ven los 5 nombres y se abre una a la vez.</li>
+        <li>Señales de cosecha como lista de chequeo; consejos numerados.</li>
+      </ul>
+    </div>
+    <sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+      <div style="display:flex;flex-direction:column;gap:10px;flex:none">
+        <span style="font-weight:700;font-size:15px;color:#474f41">{{ t.label }}</span>
+        <div style="{{ t.vars }}">
+          <div style="width:390px;position:relative;background:var(--bg);color:var(--ink);border-radius:32px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px -24px rgba(40,30,10,.4);display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 6px 6px 16px;background:var(--surface);border-bottom:1px solid var(--line)">
+              <div style="display:flex;align-items:center;gap:8px">{{ g.logo }}<span style="font-family:Bitter,Georgia,serif;font-weight:800;font-size:21px">Cultivador</span></div>
+              <button aria-label="Ajustes" style="width:48px;height:48px;border:0;border-radius:999px;background:transparent;color:var(--ink);display:grid;place-items:center">{{ i.ajustes }}</button>
+            </div>
+            <div style="padding:8px 16px 32px;display:flex;flex-direction:column;gap:28px">
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <a href="#" style="align-self:flex-start;min-height:44px;display:flex;align-items:center;gap:2px;margin-left:-6px;color:var(--ink);font-weight:700;text-decoration:none">{{ i.back }}Guía</a>
+                <div style="display:flex;gap:14px;align-items:center">
+                  <div style="width:72px;height:72px;border-radius:18px;background:var(--surface-2);display:grid;place-items:center;flex:none">{{ g.tomate56 }}</div>
+                  <div style="display:flex;flex-direction:column"><h1 style="margin:0;font-family:Bitter,Georgia,serif;font-size:32px;font-weight:800;line-height:1.1">Tomate</h1><span style="font-style:italic;color:var(--ink-2)">Solanum lycopersicum</span></div>
+                </div>
+                <p style="margin:0;text-wrap:pretty">Necesita calor y un ciclo largo. En la costa del Biobío conviene hacer almácigo protegido a fines de invierno y trasplantar cuando ya no hay riesgo de heladas.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <span style="display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--primary-soft);color:var(--on-primary-soft);font-size:14px;font-weight:700"><span style="{{ legend.siembra }}"></span>Siembra directa este mes</span>
+                  <span style="display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--earth-soft);color:var(--on-earth-soft);font-size:14px;font-weight:700"><span style="{{ legend.almacigo }}"></span>Almácigo este mes</span>
+                  <span style="display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--primary-soft);color:var(--on-primary-soft);font-size:14px;font-weight:700"><span style="{{ legend.trasplante }}"></span>Trasplante este mes</span>
+                </div>
+                <button style="height:52px;border:0;border-radius:999px;background:var(--primary);color:var(--on-primary);font-family:inherit;font-size:17px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px">{{ i.plus }}Registrar una siembra</button>
+              </div>
+
+              <section style="display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;gap:8px;color:var(--earth)">{{ i.cal }}<h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:21px;font-weight:700;color:var(--ink)">Cuándo sembrar</h2></div>
+                <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-1);padding:14px 14px 16px;display:flex;flex-direction:column;gap:14px">
+                  <div style="display:grid;grid-template-columns:86px repeat(12,minmax(0,1fr));gap:3px;align-items:center">
+                    <span style="font-size:13px;font-weight:700;color:var(--ink-2)">Mes</span>
+                    <sc-for list="{{ meses }}" as="m" hint-placeholder-count="12">
+                      <sc-if value="{{ m.cur }}" hint-placeholder-val="{{ false }}"><span style="display:grid;place-items:center;height:24px;border-radius:6px;background:var(--ink);color:var(--surface);font-size:14px;font-weight:800">{{ m.l }}</span></sc-if>
+                      <sc-if value="{{ m.notCur }}" hint-placeholder-val="{{ true }}"><span style="display:grid;place-items:center;height:24px;font-size:14px;font-weight:700;color:var(--ink-2)">{{ m.l }}</span></sc-if>
+                    </sc-for>
+                    <sc-for list="{{ calRows }}" as="row" hint-placeholder-count="3">
+                      <span style="font-size:14px;font-weight:700;line-height:1.15;padding-right:4px">{{ row.label }}</span>
+                      <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="12"><span style="{{ cell }}"></span></sc-for>
+                    </sc-for>
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--ink-2)">
+                    <span style="display:flex;align-items:center;gap:6px"><span style="{{ legend.siembra }}"></span>Siembra directa</span>
+                    <span style="display:flex;align-items:center;gap:6px"><span style="{{ legend.almacigo }}"></span>Almácigo</span>
+                    <span style="display:flex;align-items:center;gap:6px"><span style="{{ legend.trasplante }}"></span>Trasplante</span>
+                    <span style="display:flex;align-items:center;gap:6px"><span style="width:16px;height:14px;border-radius:3px;background:var(--ink)"></span>Hoy (octubre)</span>
+                  </div>
+                </div>
+                <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:2px">
+                  <li><strong>Siembra directa:</strong> octubre a noviembre.</li>
+                  <li><strong>Almácigo:</strong> agosto a octubre.</li>
+                  <li><strong>Trasplante:</strong> octubre a diciembre.</li>
+                </ul>
+                <p style="margin:0;color:var(--ink-2);font-size:16px;text-wrap:pretty">Almácigo en interior o invernadero en agosto y septiembre; trasplante desde mediados de octubre. La siembra directa es posible en octubre y noviembre, pero la cosecha empieza más tarde.</p>
+              </section>
+
+              <section style="display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;gap:8px;color:var(--earth)">{{ i.sprout }}<h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:21px;font-weight:700;color:var(--ink)">Cómo sembrar</h2></div>
+                <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-1);overflow:hidden">
+                  <dl style="margin:0;display:grid;grid-template-columns:1fr 1fr">
+                    <sc-for list="{{ datos }}" as="d" hint-placeholder-count="8">
+                      <div style="{{ d.cellStyle }}"><dt style="font-size:14px;font-weight:700;color:var(--ink-2)">{{ d.k }}</dt><dd style="margin:0;font-size:18px;font-weight:800">{{ d.v }}</dd></div>
+                    </sc-for>
+                  </dl>
+                  <div style="display:flex;gap:12px;padding:14px;border-top:1px solid var(--line)">
+                    <span style="flex:none;width:36px;height:36px;border-radius:10px;background:var(--sun);color:var(--on-sun);display:grid;place-items:center">{{ i.sun }}</span>
+                    <div style="display:flex;flex-direction:column"><strong>Sol</strong><span style="font-size:16px;text-wrap:pretty">Pleno sol: 8 horas o más. En un lugar protegido del viento maduran mejor.</span></div>
+                  </div>
+                  <div style="display:flex;gap:12px;padding:14px;border-top:1px solid var(--line)">
+                    <span style="flex:none;width:36px;height:36px;border-radius:10px;background:var(--water-soft);color:var(--water);display:grid;place-items:center">{{ i.drop }}</span>
+                    <div style="display:flex;flex-direction:column"><strong>Riego · Cada 2 a 3 días en verano</strong><span style="font-size:16px;text-wrap:pretty">Riego profundo y regular, siempre al pie. Los cambios bruscos de humedad causan frutos partidos y la 'pudrición apical' (mancha negra en la punta). Mojar las hojas favorece el tizón.</span></div>
+                  </div>
+                </div>
+                <span style="font-size:15px;color:var(--ink-2)">Los días se cuentan desde la siembra de la semilla.</span>
+              </section>
+
+              <section style="display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;gap:8px;color:var(--earth)">{{ i.home }}<h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:21px;font-weight:700;color:var(--ink)">Buenas y malas vecinas</h2></div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <span style="font-weight:700">Plantas compañeras</span>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px">
+                    <sc-for list="{{ vecinasOk }}" as="v" hint-placeholder-count="8">
+                      <a href="#" style="{{ v.style }}"><span style="color:var(--primary);display:flex">{{ i.check16 }}</span>{{ v.n }}<sc-if value="{{ v.link }}" hint-placeholder-val="{{ false }}"><span style="display:flex">{{ i.chev16 }}</span></sc-if></a>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <span style="font-weight:700">No plantar cerca de</span>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px">
+                    <sc-for list="{{ vecinasNo }}" as="v" hint-placeholder-count="4">
+                      <a href="#" style="{{ v.style }}"><span style="color:var(--danger);display:flex">{{ i.x16 }}</span>{{ v.n }}<sc-if value="{{ v.link }}" hint-placeholder-val="{{ false }}"><span style="display:flex">{{ i.chev16 }}</span></sc-if></a>
+                    </sc-for>
+                  </div>
+                </div>
+              </section>
+
+              <section style="display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;gap:8px;color:var(--earth)">{{ i.bug }}<h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:21px;font-weight:700;color:var(--ink)">Plagas y problemas comunes</h2></div>
+                <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-1);overflow:hidden">
+                  <sc-for list="{{ plagas }}" as="pl" hint-placeholder-count="5">
+                    <div style="border-top:1px solid var(--line);margin-top:-1px">
+                      <button onClick="{{ pl.toggle }}" aria-expanded="{{ pl.expanded }}" style="width:100%;min-height:56px;padding:10px 14px;border:0;background:transparent;color:var(--ink);font-family:inherit;font-size:17px;font-weight:800;display:flex;align-items:center;gap:10px;text-align:left">
+                        <span style="flex:1;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px">{{ pl.n }}<sc-if value="{{ pl.tag }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--sun);color:var(--on-sun)">{{ pl.tag }}</span></sc-if></span>
+                        <span style="{{ pl.chevStyle }}">{{ i.chevDown }}</span>
+                      </button>
+                      <sc-if value="{{ pl.open }}" hint-placeholder-val="{{ false }}">
+                        <div style="padding:0 14px 16px;display:flex;flex-direction:column;gap:10px">
+                          <div style="display:flex;gap:10px"><span style="flex:none;color:var(--ink-2);padding-top:2px">{{ i.eye }}</span><div style="display:flex;flex-direction:column"><strong style="font-size:15px">Cómo se ve</strong><span style="font-size:16px;text-wrap:pretty">{{ pl.ve }}</span></div></div>
+                          <div style="display:flex;gap:10px"><span style="flex:none;color:var(--primary);padding-top:2px">{{ i.check }}</span><div style="display:flex;flex-direction:column"><strong style="font-size:15px">Qué hacer</strong><span style="font-size:16px;text-wrap:pretty">{{ pl.hacer }}</span></div></div>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+              </section>
+
+              <section style="display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;gap:8px;color:var(--earth)">{{ i.basket }}<h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:21px;font-weight:700;color:var(--ink)">¿Está lista para cosechar?</h2></div>
+                <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+                  <sc-for list="{{ signos }}" as="sg" hint-placeholder-count="4">
+                    <li style="display:flex;gap:10px;align-items:flex-start"><span style="flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--primary);color:var(--primary);display:grid;place-items:center;margin-top:1px">{{ i.check14 }}</span><span style="font-size:16px;text-wrap:pretty">{{ sg }}</span></li>
+                  </sc-for>
+                </ul>
+              </section>
+
+              <section style="display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;gap:8px;color:var(--earth)">{{ i.sun }}<h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:21px;font-weight:700;color:var(--ink)">Consejos</h2></div>
+                <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+                  <sc-for list="{{ consejos }}" as="cj" hint-placeholder-count="3">
+                    <li style="display:flex;gap:10px;align-items:flex-start"><span style="flex:none;width:26px;height:26px;border-radius:999px;background:var(--earth-soft);color:var(--on-earth-soft);display:grid;place-items:center;font-weight:800;font-size:14px;margin-top:1px">{{ cj.n }}</span><span style="font-size:16px;text-wrap:pretty">{{ cj.t }}</span></li>
+                  </sc-for>
+                </ol>
+              </section>
+            </div>
+            <nav style="display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-top:1px solid var(--line);padding:6px 4px 12px">
+              <sc-for list="{{ navGuia }}" as="n" hint-placeholder-count="4">
+                <sc-if value="{{ n.active }}" hint-placeholder-val="{{ false }}"><a href="#" aria-current="page" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:800"><span style="display:grid;place-items:center;width:60px;height:32px;border-radius:999px;background:var(--primary-soft);color:var(--on-primary-soft)">{{ n.icon }}</span>{{ n.label }}</a></sc-if>
+                <sc-if value="{{ n.inactive }}" hint-placeholder-val="{{ true }}"><a href="#" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;color:var(--ink-2);text-decoration:none;font-size:14px"><span style="display:grid;place-items:center;width:60px;height:32px">{{ n.icon }}</span>{{ n.label }}</a></sc-if>
+              </sc-for>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+    <div style="flex:1 1 260px;max-width:330px;display:flex;flex-direction:column;gap:10px">
+      <h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:26px">Bitácora</h3>
+      <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;text-wrap:pretty">
+        <li>Una tarjeta por día con entradas en filas, en lugar de una tarjeta por entrada.</li>
+        <li>Cada tipo tiene ícono propio sobre su color (agua, tierra, plaga, cosecha) y siempre su nombre escrito.</li>
+        <li>«Editar» y «Eliminar» pasan a un menú ⋯ de 44 px: menos ruido y menos borrados accidentales.</li>
+        <li>Fechas en minúscula normal, más fáciles de leer que en mayúsculas espaciadas.</li>
+        <li>Los enlaces largos se cortan con <code>overflow-wrap: anywhere</code>.</li>
+      </ul>
+    </div>
+    <sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+      <div style="display:flex;flex-direction:column;gap:10px;flex:none">
+        <span style="font-weight:700;font-size:15px;color:#474f41">{{ t.label }}</span>
+        <div style="{{ t.vars }}">
+          <div style="width:390px;position:relative;background:var(--bg);color:var(--ink);border-radius:32px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px -24px rgba(40,30,10,.4);display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 6px 6px 16px;background:var(--surface);border-bottom:1px solid var(--line)">
+              <div style="display:flex;align-items:center;gap:8px">{{ g.logo }}<span style="font-family:Bitter,Georgia,serif;font-weight:800;font-size:21px">Cultivador</span></div>
+              <button aria-label="Ajustes" style="width:48px;height:48px;border:0;border-radius:999px;background:transparent;color:var(--ink);display:grid;place-items:center">{{ i.ajustes }}</button>
+            </div>
+            <div style="padding:20px 16px 104px;display:flex;flex-direction:column;gap:18px">
+              <div><h1 style="margin:0;font-family:Bitter,Georgia,serif;font-size:30px;font-weight:800;line-height:1.15">Bitácora</h1><p style="margin:2px 0 0;color:var(--ink-2)">7 entradas</p></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:15px;font-weight:700">Cultivo<span style="height:48px;box-sizing:border-box;border:2px solid var(--line-strong);border-radius:12px;background:var(--surface);padding:0 10px 0 14px;display:flex;align-items:center;justify-content:space-between;font-size:17px;font-weight:400">Todos{{ i.chevDown }}</span></label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:15px;font-weight:700">Tipo<span style="height:48px;box-sizing:border-box;border:2px solid var(--line-strong);border-radius:12px;background:var(--surface);padding:0 10px 0 14px;display:flex;align-items:center;justify-content:space-between;font-size:17px;font-weight:400">Todos{{ i.chevDown }}</span></label>
+              </div>
+              <sc-for list="{{ bitacora }}" as="day" hint-placeholder-count="5">
+                <section style="display:flex;flex-direction:column;gap:8px">
+                  <h2 style="margin:0;font-size:16px;font-weight:800;color:var(--ink-2)">{{ day.date }}</h2>
+                  <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-1);overflow:hidden">
+                    <sc-for list="{{ day.items }}" as="e" hint-placeholder-count="1">
+                      <sc-if value="{{ e.notFirst }}" hint-placeholder-val="{{ false }}"><div style="height:1px;background:var(--line);margin-left:66px"></div></sc-if>
+                      <div style="display:flex;gap:12px;padding:14px 6px 14px 14px">
+                        <span style="{{ e.iconStyle }}">{{ e.icon }}</span>
+                        <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding-top:2px">
+                          <span style="font-weight:800">{{ e.title }}</span>
+                          <span style="display:flex;align-items:flex-start;gap:6px;font-size:15px;color:var(--ink-2);line-height:1.35"><span style="flex:none;margin-top:1px">{{ e.glyph }}</span>{{ e.crop }}</span>
+                          <sc-if value="{{ e.text }}" hint-placeholder-val="{{ false }}"><p style="margin:4px 0 0;overflow-wrap:anywhere;text-wrap:pretty">{{ e.text }}</p></sc-if>
+                        </div>
+                        <button aria-label="Opciones de la entrada" style="flex:none;width:44px;height:44px;border:0;border-radius:999px;background:transparent;color:var(--ink-2);display:grid;place-items:center">{{ i.more }}</button>
+                      </div>
+                    </sc-for>
+                  </div>
+                </section>
+              </sc-for>
+            </div>
+            <button style="position:absolute;right:16px;bottom:96px;height:56px;padding:0 22px 0 18px;border:0;border-radius:999px;background:var(--primary);color:var(--on-primary);font-family:inherit;font-size:17px;font-weight:800;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-2)">{{ i.plus }}Nueva entrada</button>
+            <nav style="display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-top:1px solid var(--line);padding:6px 4px 12px">
+              <sc-for list="{{ navBitacora }}" as="n" hint-placeholder-count="4">
+                <sc-if value="{{ n.active }}" hint-placeholder-val="{{ false }}"><a href="#" aria-current="page" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:800"><span style="display:grid;place-items:center;width:60px;height:32px;border-radius:999px;background:var(--primary-soft);color:var(--on-primary-soft)">{{ n.icon }}</span>{{ n.label }}</a></sc-if>
+                <sc-if value="{{ n.inactive }}" hint-placeholder-val="{{ true }}"><a href="#" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;color:var(--ink-2);text-decoration:none;font-size:14px"><span style="display:grid;place-items:center;width:60px;height:32px">{{ n.icon }}</span>{{ n.label }}</a></sc-if>
+              </sc-for>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+    <div style="flex:1 1 260px;max-width:330px;display:flex;flex-direction:column;gap:10px">
+      <h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:26px">Diálogo «Nueva entrada»</h3>
+      <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;text-wrap:pretty">
+        <li>Tipos en una cuadrícula fija de 3 columnas: elegir uno no mueve nada de lugar.</li>
+        <li>Íconos de trazo en el color de cada tipo, iguales a los de la Bitácora. El elegido se rellena y lleva ✓.</li>
+        <li>El campo Cultivo muestra el glifo de la especie.</li>
+        <li>Cantidad y unidad aparecen solo con «Cosecha».</li>
+        <li>El texto de ayuda del detalle queda visible sobre el pie fijo.</li>
+      </ul>
+    </div>
+    <sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+      <div style="display:flex;flex-direction:column;gap:10px;flex:none">
+        <span style="font-weight:700;font-size:15px;color:#474f41">{{ t.label }}</span>
+        <div style="{{ t.vars }}">
+          <div style="width:390px;position:relative;background:var(--bg);color:var(--ink);border-radius:32px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px -24px rgba(40,30,10,.4)">
+            <div style="background:var(--scrim);padding-top:44px">
+              <div role="dialog" aria-label="Nueva entrada" style="background:var(--surface);border-radius:24px 24px 0 0;display:flex;flex-direction:column">
+                <div style="display:flex;justify-content:center;padding-top:8px"><span style="width:40px;height:5px;border-radius:999px;background:var(--line-strong)"></span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 8px 8px 20px;border-bottom:1px solid var(--line)">
+                  <h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:24px;font-weight:800">Nueva entrada</h2>
+                  <button aria-label="Cerrar" style="width:48px;height:48px;border:0;border-radius:999px;background:transparent;color:var(--ink);display:grid;place-items:center">{{ i.x }}</button>
+                </div>
+                <div style="padding:18px 20px 20px;display:flex;flex-direction:column;gap:18px">
+                  <label style="display:flex;flex-direction:column;gap:6px;font-weight:800">
+                    <span>Cultivo <span style="color:var(--danger)" aria-hidden="true">*</span></span>
+                    <span style="height:52px;box-sizing:border-box;border:2px solid var(--line-strong);border-radius:12px;background:var(--surface);padding:0 12px;display:flex;align-items:center;gap:10px;font-weight:400">{{ g.zapallo24 }}<span style="flex:1">Zapallo italiano</span>{{ i.chevDown }}</span>
+                  </label>
+                  <div style="display:flex;flex-direction:column;gap:6px">
+                    <span style="font-weight:800">Tipo</span>
+                    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+                      <sc-for list="{{ tipos }}" as="tp" hint-placeholder-count="5">
+                        <sc-if value="{{ tp.sel }}" hint-placeholder-val="{{ false }}"><button aria-pressed="true" style="position:relative;min-height:76px;border-radius:14px;border:2px solid var(--primary);background:var(--primary);color:var(--on-primary);font-family:inherit;font-size:15px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px 4px"><span style="position:absolute;top:6px;right:8px;display:flex">{{ i.check16 }}</span>{{ tp.icon }}<span>{{ tp.label }}</span></button></sc-if>
+                        <sc-if value="{{ tp.unsel }}" hint-placeholder-val="{{ true }}"><button onClick="{{ tp.onPick }}" aria-pressed="false" style="min-height:76px;border-radius:14px;border:2px solid var(--line-strong);background:var(--surface);color:var(--ink);font-family:inherit;font-size:15px;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px 4px"><span style="{{ tp.iconColor }}">{{ tp.icon }}</span><span>{{ tp.label }}</span></button></sc-if>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <label style="display:flex;flex-direction:column;gap:6px;font-weight:800">
+                    <span>Fecha <span style="color:var(--danger)" aria-hidden="true">*</span></span>
+                    <span style="height:52px;box-sizing:border-box;border:2px solid var(--line-strong);border-radius:12px;background:var(--surface);padding:0 14px;display:flex;align-items:center;justify-content:space-between;font-weight:400">06-10-2026{{ i.cal }}</span>
+                  </label>
+                  <sc-if value="{{ isCosecha }}" hint-placeholder-val="{{ true }}">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                      <label style="display:flex;flex-direction:column;gap:6px;font-weight:800"><span>Cantidad <span style="font-weight:400;color:var(--ink-2)">(opcional)</span></span><span style="height:52px;box-sizing:border-box;border:2px solid var(--line-strong);border-radius:12px;background:var(--surface)"></span></label>
+                      <label style="display:flex;flex-direction:column;gap:6px;font-weight:800"><span>Unidad</span><span style="height:52px;box-sizing:border-box;border:2px solid var(--line-strong);border-radius:12px;background:var(--surface);padding:0 10px 0 14px;display:flex;align-items:center;justify-content:space-between;font-weight:400">gramos{{ i.chevDown }}</span></label>
+                    </div>
+                  </sc-if>
+                  <label style="display:flex;flex-direction:column;gap:6px;font-weight:800">
+                    <span>Detalle <span style="font-weight:400;color:var(--ink-2)">(opcional)</span></span>
+                    <span style="height:104px;box-sizing:border-box;border:2px solid var(--line-strong);border-radius:12px;background:var(--surface)"></span>
+                    <span style="font-weight:400;font-size:15px;color:var(--ink-2)">¿Qué viste o hiciste? Ej.: «Primeras flores moradas»</span>
+                  </label>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 20px 20px;border-top:1px solid var(--line);background:var(--surface)">
+                  <button style="height:52px;border-radius:999px;border:2px solid var(--line-strong);background:transparent;color:var(--ink);font-family:inherit;font-size:17px;font-weight:800">Cancelar</button>
+                  <button style="height:52px;border-radius:999px;border:0;background:var(--primary);color:var(--on-primary);font-family:inherit;font-size:17px;font-weight:800">Guardar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:26px">Microinteracciones</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+      <sc-for list="{{ micro }}" as="mi" hint-placeholder-count="3">
+        <div style="background:#fffdf7;border:1px solid #d9d0bb;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:8px">
+          <strong style="font-family:Bitter,Georgia,serif;font-size:19px">{{ mi.t }}</strong>
+          <span style="text-wrap:pretty">{{ mi.d }}</span>
+          <span style="font-size:15px;color:#474f41;text-wrap:pretty"><strong>Con movimiento reducido:</strong> {{ mi.r }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="tokens" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:Bitter,Georgia,serif;font-size:22px;font-weight:800;color:#8a4a1f">4</span><h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:34px;font-weight:800;letter-spacing:-0.01em">Tokens de diseño</h2></div>
+  <p style="margin:0;max-width:820px;color:#474f41;text-wrap:pretty">Mismos valores que usan los mockups. El bloque oscuro se aplica con <code>data-theme="dark"</code> y con la preferencia del sistema cuando el tema es «Automático»; ajusta el selector al que ya usa la app. Las fuentes se descargan como woff2 variables (subset latino) a una carpeta del proyecto y se agregan a la caché del service worker.</p>
+  <div style="position:relative">
+    <button onClick="{{ copy }}" style="position:absolute;top:12px;right:12px;height:40px;padding:0 16px;border-radius:999px;border:0;background:#92d38a;color:#0e260f;font-family:inherit;font-weight:800;font-size:15px">{{ copyLabel }}</button>
+    <pre style="margin:0;background:#1b2417;color:#edf1e6;border-radius:16px;padding:20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.55;max-height:560px;overflow:auto;white-space:pre">{{ tokensCss }}</pre>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <h3 style="margin:0;font-family:Bitter,Georgia,serif;font-size:22px">Contraste de cada par</h3>
+    <div style="overflow-x:auto;background:#fffdf7;border:1px solid #d9d0bb;border-radius:14px">
+      <table style="width:100%;min-width:640px;border-collapse:collapse;font-size:15px">
+        <thead><tr style="text-align:left;background:#ebe4d2">
+          <th style="padding:10px 14px">Par</th><th style="padding:10px 14px">Uso</th><th style="padding:10px 14px">Mínimo</th><th style="padding:10px 14px">Claro</th><th style="padding:10px 14px">Oscuro</th>
+        </tr></thead>
+        <tbody>
+          <sc-for list="{{ contraste }}" as="cr" hint-placeholder-count="18">
+            <tr style="border-top:1px solid #e6dfcd">
+              <td style="padding:8px 14px;font-family:ui-monospace,Menlo,monospace;font-size:13px">{{ cr.par }}</td>
+              <td style="padding:8px 14px">{{ cr.uso }}</td>
+              <td style="padding:8px 14px">{{ cr.min }}</td>
+              <td style="padding:8px 14px"><span style="display:flex;align-items:center;gap:8px"><span style="{{ cr.lSw }}">Aa</span><strong>{{ cr.l }}</strong></span></td>
+              <td style="padding:8px 14px"><span style="display:flex;align-items:center;gap:8px"><span style="{{ cr.dSw }}">Aa</span><strong>{{ cr.d }}</strong></span></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="plan" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:Bitter,Georgia,serif;font-size:22px;font-weight:800;color:#8a4a1f">5</span><h2 style="margin:0;font-family:Bitter,Georgia,serif;font-size:34px;font-weight:800;letter-spacing:-0.01em">Plan de cambios</h2></div>
+  <p style="margin:0;color:#474f41">Ordenado por impacto y luego por esfuerzo. Los selectores son supuestos.</p>
+  <div style="overflow-x:auto;background:#fffdf7;border:1px solid #d9d0bb;border-radius:14px">
+    <table style="width:100%;min-width:760px;border-collapse:collapse;font-size:15px">
+      <thead><tr style="text-align:left;background:#ebe4d2">
+        <th style="padding:10px 14px;width:36px">#</th><th style="padding:10px 14px">Cambio</th><th style="padding:10px 14px">Impacto</th><th style="padding:10px 14px">Esfuerzo</th><th style="padding:10px 14px">Selectores o componentes</th>
+      </tr></thead>
+      <tbody>
+        <sc-for list="{{ plan }}" as="pl" hint-placeholder-count="16">
+          <tr style="border-top:1px solid #e6dfcd;vertical-align:top">
+            <td style="padding:10px 14px;font-weight:800;color:#474f41">{{ pl.n }}</td>
+            <td style="padding:10px 14px;text-wrap:pretty">{{ pl.c }}</td>
+            <td style="padding:10px 14px"><span style="{{ pl.impStyle }}">{{ pl.imp }}</span></td>
+            <td style="padding:10px 14px;font-weight:800">{{ pl.e }}</td>
+            <td style="padding:10px 14px;font-family:ui-monospace,Menlo,monospace;font-size:13px">{{ pl.s }}</td>
+          </tr>
+        </sc-for>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;temas&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Claro y oscuro&quot;,&quot;Solo claro&quot;,&quot;Solo oscuro&quot;],&quot;default&quot;:&quot;Claro y oscuro&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;pliegue&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { watered: {}, plagaOpen: 0, tipo: 'cosecha', copied: false };
+
+  LIGHT = { bg:'#f4efe2', surface:'#fffdf7', surface2:'#ebe4d2', ink:'#1b2417', ink2:'#474f41', line:'#d9d0bb', lineStrong:'#7a725f', primary:'#2c6a2e', onPrimary:'#ffffff', primarySoft:'#e1edd6', onPrimarySoft:'#1e4a20', earth:'#8a4a1f', earthSoft:'#f2e1cf', onEarthSoft:'#6b3512', water:'#255f7e', waterSoft:'#dcebf3', onWaterSoft:'#1c4a63', sun:'#f8e3a0', onSun:'#4a3200', sunLine:'#9a6f00', danger:'#a1311d', dangerSoft:'#f6ddd6', focus:'#2a5bd7', scrim:'rgba(27,36,23,.5)', shadow1:'0 1px 2px rgba(60,45,20,.07), 0 2px 8px -2px rgba(60,45,20,.08)', shadow2:'0 10px 28px -8px rgba(60,45,20,.35)' };
+  DARK = { bg:'#11160f', surface:'#1a2118', surface2:'#242c21', ink:'#edf1e6', ink2:'#b8c1ad', line:'#323c2e', lineStrong:'#85907b', primary:'#92d38a', onPrimary:'#0e260f', primarySoft:'#1f3320', onPrimarySoft:'#c6e7bf', earth:'#e3a47c', earthSoft:'#3a2619', onEarthSoft:'#f1c9ad', water:'#8cc9e8', waterSoft:'#15303d', onWaterSoft:'#bfe3f5', sun:'#3d300b', onSun:'#f7d97c', sunLine:'#c99a1f', danger:'#f0937f', dangerSoft:'#3d1d16', focus:'#9ab8ff', scrim:'rgba(0,0,0,.6)', shadow1:'none', shadow2:'0 10px 28px -8px rgba(0,0,0,.7)' };
+
+  GL = {
+    logo: [['path',{d:'M7 27c1.5-4.5 5-7 9-7s7.5 2.5 9 7z',fill:'#9a5a32'}],['path',{d:'M16 20v-7'}],['path',{d:'M16 13c0-4-3-6.5-8-6.5 0 4.5 3.5 6.5 8 6.5z',fill:'#6fb245'}],['path',{d:'M16 14c.5-4 3.5-6.5 8-6 0 4-3.5 6.5-8 6z',fill:'#8cc95c'}]],
+    tomate: [['ellipse',{cx:16,cy:19,rx:11,ry:9.5,fill:'#d94a3a'}],['path',{d:'M10 11.5l3.6 1.3L16 9.5l2.4 3.3 3.6-1.3-2.4 3.2h-7.2z',fill:'#5f9e3c'}],['path',{d:'M16 9.5V6'}],['path',{d:'M9.5 19a6.5 6.5 0 0 1 3-4.8',stroke:'#fff',strokeOpacity:.8,strokeWidth:1.5}]],
+    lechuga: [['path',{d:'M16 27c-6.1 0-11-3.9-11-9.3 0-2.9 1.5-5 3.6-6 0-3 2.4-5.4 5-5.4 1 0 1.7.3 2.4.8.7-.5 1.4-.8 2.4-.8 2.6 0 5 2.4 5 5.4 2.1 1 3.6 3.1 3.6 6C27 23.1 22.1 27 16 27z',fill:'#7fbf4d'}],['path',{d:'M16 27V13M16 21l-4.5-3.5M16 17.5l4.5-3.5M16 24l4-3'}]],
+    poroto_mb: [['ellipse',{cx:11.5,cy:12,rx:5,ry:7,transform:'rotate(-30 11.5 12)',fill:'#9b3a4a'}],['ellipse',{cx:20.5,cy:20,rx:5,ry:7,transform:'rotate(25 20.5 20)',fill:'#b0485a'}],['path',{d:'M9.6 10a3 3 0 0 1 2.6-1.8',stroke:'#fff',strokeOpacity:.75,strokeWidth:1.5}],['path',{d:'M19.4 16.6a3 3 0 0 1 2.7.1',stroke:'#fff',strokeOpacity:.75,strokeWidth:1.5}]],
+    poroto_en: [['path',{d:'M5 25c3.5-.8 6.5-3.8 9.5-8s6-8 11.5-10c.8 3.4-1.2 8-4.5 11.5S11.5 26.5 5 25z',fill:'#6aa83f'}],['circle',{cx:11,cy:21,r:2,fill:'#b5dd7c',strokeWidth:1.2}],['circle',{cx:15.5,cy:16.5,r:2,fill:'#b5dd7c',strokeWidth:1.2}],['circle',{cx:20,cy:12,r:2,fill:'#b5dd7c',strokeWidth:1.2}],['path',{d:'M26 7l2-2.5'}]],
+    zapallo: [['rect',{x:4.5,y:11.75,width:23,height:8.5,rx:4.25,transform:'rotate(-35 16 16)',fill:'#4f8a3a'}],['path',{d:'M8.5 16h14',transform:'rotate(-35 16 16)',stroke:'#b2d98a',strokeWidth:1.5}],['path',{d:'M25.2 9.4l2.6-2.2'}]],
+    choclo: [['ellipse',{cx:16,cy:13,rx:5.5,ry:9,fill:'#f2c230'}],['path',{d:'M13.2 6v13.5M16 4.2v15.8M18.8 6v13.5M11 9.5h10M10.6 13.5h10.8M11.2 17.5h9.6',stroke:'#a67a0a',strokeWidth:1}],['path',{d:'M16 28c-5.2-.8-9.2-5.6-9.5-12 3.3 1.8 5.6 5 6.6 9z',fill:'#6aa83f'}],['path',{d:'M16 28c5.2-.8 9.2-5.6 9.5-12-3.3 1.8-5.6 5-6.6 9z',fill:'#5a9636'}]],
+    cilantro: [['path',{d:'M16 28V9M16 21l-5.5-4.5M16 17l5.5-4.5M16 13.5l-3-2.8'}],['circle',{cx:9.5,cy:15.5,r:3.3,fill:'#6db04a'}],['circle',{cx:22.5,cy:11.5,r:3.3,fill:'#6db04a'}],['circle',{cx:16,cy:7.5,r:3,fill:'#7cc057'}],['circle',{cx:12,cy:10,r:2.4,fill:'#7cc057'}]],
+    albahaca: [['path',{d:'M16 16.5v-4'}],['path',{d:'M16 13c-.6-4.2-3.6-6.5-8-6.5.2 4.3 3.4 6.5 8 6.5z',fill:'#5aa845'}],['path',{d:'M16 12.5c.8-4.8 4-7.6 9-7.5-.2 4.8-3.8 7.6-9 7.5z',fill:'#4c9a3a'}],['path',{d:'M10 19.5h12l-1.8 8h-8.4z',fill:'#c8693c'}],['rect',{x:8.5,y:16.5,width:15,height:3.5,rx:1.2,fill:'#dd8455'}]]
+  };
+
+  IC = {
+    drop:'M12 3.5c3 4 6 7.2 6 10.5a6 6 0 0 1-12 0c0-3.3 3-6.5 6-10.5z',
+    check:'M5 12.5l4.5 4.5L19 7.5', plus:'M12 5v14M5 12h14', more:'M5.5 12h.01M12 12h.01M18.5 12h.01',
+    cal:'M4 6.5h16v13.5H4zM4 10.5h16M8.5 4v4M15.5 4v4', basket:'M3.5 10h17l-1.8 9.5H5.3zM8 10l3-6M16 10l-3-6M9.5 14v2M14.5 14v2',
+    sprout:'M12 21v-9M12 12c0-4-3-6.5-7.5-6.5 0 4.2 3 6.5 7.5 6.5zM12 14c0-3.5 2.6-5.6 6.5-5.6 0 3.5-2.6 5.6-6.5 5.6z',
+    alert:'M12 4l9.5 16h-19zM12 10v4.5M12 17.6h.01', eye:'M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12zM12 9.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6z',
+    bug:'M8 9.5h8v4.5a4 4 0 0 1-8 0zM9.5 9.5a2.5 2.5 0 0 1 5 0M3.5 12.5H8M16 12.5h4.5M5 7l3 2.5M19 7l-3 2.5M5 19l3-2.5M19 19l-3-2.5M12 9.5V18',
+    abono:'M3 20h18M5 20c1-4 4-6.5 7-6.5s6 2.5 7 6.5M12 13.5V9M12 9c-1.8-2.4-4-3-6-2.2 1 2.4 3.5 3 6 2.2zM12 9c1.5-2 3.4-2.5 5-1.8-.8 2-3 2.5-5 1.8z',
+    obs:'M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12zM12 9.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6z',
+    chev:'M9.5 6l6 6-6 6', chevDown:'M6 9.5l6 6 6-6', back:'M14.5 6l-6 6 6 6', x:'M6 6l12 12M18 6L6 18',
+    sun:'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4',
+    download:'M12 4v11M7 10.5l5 5 5-5M5 20h14', home:'M4 11l8-7 8 7v9H4zM10 20v-5h4v5',
+    book:'M3.5 5.5H9a3 3 0 0 1 3 3V20a2.5 2.5 0 0 0-2.5-2.5h-6zM20.5 5.5H15a3 3 0 0 0-3 3V20a2.5 2.5 0 0 1 2.5-2.5h6z',
+    notes:'M6 3.5h12v17H6zM9 8.5h6M9 12h6M9 15.5h4',
+    ajustes:'M4 7h8.5M17.5 7H20M4 17h2.5M11.5 17H20M15 4.8a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4zM9 14.8a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4z'
+  };
+
+  glyph(k, size) {
+    const h = React.createElement;
+    return h('svg', { width:size, height:size, viewBox:'0 0 32 32', fill:'none', stroke:'var(--ink)', strokeWidth:1.6, strokeLinejoin:'round', strokeLinecap:'round', 'aria-hidden':true, style:{display:'block'} },
+      this.GL[k].map((p, n) => h(p[0], Object.assign({ key:n }, p[1]))));
+  }
+  ico(k, size = 22, sw = 2) {
+    return React.createElement('svg', { width:size, height:size, viewBox:'0 0 24 24', fill:'none', stroke:'currentColor', strokeWidth: k === 'more' ? 3.4 : sw, strokeLinecap:'round', strokeLinejoin:'round', 'aria-hidden':true, style:{display:'block',flex:'none'} },
+      React.createElement('path', { d:this.IC[k] }));
+  }
+  kebab(k) { return k.replace(/([A-Z]|\d+)/g, m => '-' + m.toLowerCase()); }
+  vars(t) { const o = {}; for (const k in t) o['--' + this.kebab(k)] = t[k]; return o; }
+  lum(hex) { const c = [1,3,5].map(i => parseInt(hex.substr(i,2),16)/255).map(v => v <= .03928 ? v/12.92 : Math.pow((v+.055)/1.055, 2.4)); return .2126*c[0] + .7152*c[1] + .0722*c[2]; }
+  cr(a, b) { const x = this.lum(a), y = this.lum(b); return (Math.max(x,y)+.05)/(Math.min(x,y)+.05); }
+
+  genCss() {
+    const block = (t, ind) => Object.keys(t).map(k => `${ind}--${this.kebab(k)}: ${t[k]};`).join('\n');
+    return `/* Fuentes autoalojadas: woff2 variables, subset latino, en /fonts */
+@font-face { font-family: "Bitter"; src: url("fonts/bitter-var.woff2") format("woff2"); font-weight: 400 800; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible Next"; src: url("fonts/atkinson-hyperlegible-next-var.woff2") format("woff2"); font-weight: 200 800; font-display: swap; }
+
+:root {
+  color-scheme: light;
+
+  /* Tipografía · base 17 px */
+  --font-display: "Bitter", Georgia, serif;
+  --font-body: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --text-xs: 0.875rem;    /* 14 px · mínimo absoluto (etiquetas) */
+  --text-sm: 0.9375rem;   /* 15 px · datos secundarios */
+  --text-base: 1.0625rem; /* 17 px · cuerpo */
+  --text-lg: 1.1875rem;   /* 19 px · título de tarjeta */
+  --text-xl: 1.3125rem;   /* 21 px · título de sección */
+  --text-2xl: 1.5rem;     /* 24 px · título destacado */
+  --text-3xl: 1.875rem;   /* 30 px · título de pantalla */
+  --leading-tight: 1.2;
+  --leading-body: 1.45;
+  --weight-body: 400;
+  --weight-strong: 700;
+  --weight-display: 800;
+
+  /* Espaciado · base 4 px */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 48px;
+
+  /* Forma */
+  --radius-sm: 8px;    /* insignias, avisos en línea */
+  --radius-md: 14px;   /* tiles, campos, filas sueltas */
+  --radius-lg: 20px;   /* tarjetas */
+  --radius-sheet: 24px;
+  --radius-pill: 999px;
+  --border-w: 1px;     /* tarjetas, divisores */
+  --border-w-strong: 2px; /* campos y botones secundarios */
+  --tap: 48px;         /* alto de botones y campos */
+  --tap-min: 44px;     /* íconos y enlaces */
+  --focus-ring: 3px solid var(--focus);
+  --focus-offset: 2px;
+
+  /* Movimiento */
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+
+  /* Color · tema claro */
+${block(this.LIGHT, '  ')}
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+${block(this.DARK, '  ')}
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+${block(this.DARK, '    ')}
+  }
+}
+
+:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}`;
+  }
+
+  renderVals() {
+    const p = this.props, s = this.state;
+    const L = this.LIGHT, D = this.DARK;
+    const g = k => this.glyph(k, 28);
+    const i = {
+      drop:this.ico('drop'), drop18:this.ico('drop',18), check:this.ico('check'), check16:this.ico('check',16,2.5), check14:this.ico('check',14,2.75),
+      plus:this.ico('plus'), plus18:this.ico('plus',18), more:this.ico('more'), cal:this.ico('cal'), basket:this.ico('basket'), sprout:this.ico('sprout'),
+      alert16:this.ico('alert',16,2.25), eye:this.ico('eye',20), bug:this.ico('bug'), chev:this.ico('chev',18,2.5), chev16:this.ico('chev',14,2.5), chevDown:this.ico('chevDown',20,2.5),
+      back:this.ico('back',22,2.5), x:this.ico('x',24,2.25), x16:this.ico('x',14,2.75), sun:this.ico('sun',20), download:this.ico('download'), home:this.ico('home'), ajustes:this.ico('ajustes',24)
+    };
+    const all = [{ key:'l', label:'Tema claro', vars:this.vars(L) }, { key:'d', label:'Tema oscuro', vars:this.vars(D) }];
+    const temas = p.temas ?? 'Claro y oscuro';
+    const themes = temas === 'Solo claro' ? [all[0]] : temas === 'Solo oscuro' ? [all[1]] : all;
+
+    const riegoBase = [
+      { id:'choclo', sp:'choclo', name:'Choclo', place:'', status:'Último riego: hace 5 días · toca regar', urgent:true },
+      { id:'lechuga', sp:'lechuga', name:'Lechuga', place:'Macetero cocina', status:'Último riego: hace 4 días · toca regar', urgent:true },
+      { id:'penr', sp:'poroto_en', name:'Poroto enredadera', place:'', status:'Sin riegos registrados' },
+      { id:'tomate', sp:'tomate', name:'Tomate', place:'Cherry', status:'Sin riegos registrados' },
+      { id:'pmb', sp:'poroto_mb', name:'Poroto mata baja', place:'Bancal norte junto a la reja del patio', status:'Último riego: ayer' }
+    ];
+    const W = s.watered;
+    const riego = riegoBase.map(r => {
+      const done = !!W[r.id];
+      return { ...r, glyph:g(r.sp), done, notDone:!done, showUrgent:!done && !!r.urgent, showPlain:!done && !r.urgent,
+        onWater:() => this.setState(st => ({ watered:{ ...st.watered, [r.id]:true } })),
+        onUndo:() => this.setState(st => { const w = { ...st.watered }; delete w[r.id]; return { watered:w }; }) };
+    });
+    const pend = riego.filter(r => r.urgent && r.notDone).length;
+    const allDone = riego.every(r => r.done);
+    const riegoTitulo = allDone ? 'Todo regado por hoy' : pend === 0 ? 'Nada atrasado hoy' : pend === 1 ? '1 cultivo pide agua' : `${pend} cultivos piden agua`;
+    const waterAll = () => { const w = {}; riegoBase.forEach(r => w[r.id] = true); this.setState({ watered:w }); };
+
+    const cosechas = [
+      ['lechuga','Lechuga · Macetero cocina','En cosecha hasta ~21 de octubre',0],
+      ['poroto_en','Poroto enredadera','Desde ~21 de octubre',15],
+      ['poroto_mb','Poroto mata baja · Bancal norte junto a la reja del patio','Desde ~18 de noviembre',43],
+      ['choclo','Choclo','Desde ~30 de noviembre',55],
+      ['zapallo','Zapallo italiano','Desde ~30 de noviembre',55]
+    ].map((c, n) => ({ glyph:g(c[0]), name:c[1], when:c[2], days:c[3], ya:c[3] === 0, notYa:c[3] !== 0, notFirst:n > 0 }));
+
+    const sembrar = [
+      ['poroto_mb','Poroto mata baja','Siembra directa'],['poroto_en','Poroto enredadera','Siembra directa'],
+      ['tomate','Tomate','Siembra directa, almácigo y trasplante'],['lechuga','Lechuga','Siembra directa, almácigo y trasplante'],
+      ['zapallo','Zapallo italiano','Siembra directa, almácigo y trasplante'],['choclo','Choclo','Siembra directa'],
+      ['cilantro','Cilantro','Siembra directa'],['albahaca','Albahaca','Almácigo']
+    ].map(x => ({ glyph:g(x[0]), name:x[1], how:x[2] }));
+
+    const mkSteps = (labels, cur, pct) => labels.map((l, n) => ({ label:l, done:n < cur, current:n === cur, future:n > cur,
+      fill:{ height:'100%', width:(n < cur ? 100 : n === cur ? pct : 0) + '%', background:'var(--primary)', borderRadius:999 } }));
+    const track = n => ({ display:'grid', gridTemplateColumns:`repeat(${n},minmax(0,1fr))`, gap:4 });
+    const f = (ic, text) => ({ icon:this.ico(ic,16), text });
+    const cultivos = [
+      { glyph:this.glyph('zapallo',36), name:'Zapallo italiano', meta:'Bancal · Siembra directa', stage:'Germinación', day:4, total:55,
+        steps:mkSteps(['Germina','Crece','Florece','Cosecha'],0,45), trackStyle:track(4),
+        desc:'Las semillas están germinando. Mantén la tierra húmeda; las primeras hojas deberían asomar entre el día 5 y el 10.', link:'',
+        facts:[f('cal','Sembrado 2 oct'), f('drop','Último riego: ayer'), f('basket','Cosecha ~30 nov')] },
+      { glyph:this.glyph('poroto_en',36), name:'Poroto enredadera', meta:'Suelo · Siembra directa', stage:'Floración', day:50, total:65,
+        steps:mkSteps(['Germina','Crece','Florece','Cosecha'],2,55), trackStyle:track(4),
+        desc:'Aparecen las flores; las primeras vainas se forman en unas dos semanas.', link:'',
+        facts:[f('cal','Sembrado 17 ago'), f('drop','Sin riegos registrados'), f('basket','Cosecha ~21 oct')] },
+      { glyph:this.glyph('lechuga',36), name:'Lechuga · Macetero cocina', meta:'Macetero · Siembra directa', stage:'Cosecha', day:60, total:75,
+        steps:mkSteps(['Germina','Crece','Cosecha'],2,40), trackStyle:track(3),
+        desc:'¡Época de cosecha hasta cerca del 21 de octubre!', link:'Revisa las señales de cosecha.',
+        facts:[f('cal','Sembrado 7 ago'), f('drop','Último riego: hace 4 días'), f('basket','Cosecha ~1 oct')] }
+    ];
+
+    const fills = {
+      siembra:{ background:'var(--primary)' },
+      almacigo:{ backgroundColor:'var(--earth)', backgroundImage:'radial-gradient(var(--surface) 1.3px, transparent 1.8px)', backgroundSize:'6px 6px' },
+      trasplante:{ backgroundImage:'repeating-linear-gradient(135deg, var(--primary) 0 2.5px, transparent 2.5px 5.5px)', boxShadow:'inset 0 0 0 1.5px var(--primary)' }
+    };
+    const legend = {}; Object.keys(fills).forEach(k => legend[k] = { width:16, height:14, borderRadius:3, flex:'none', display:'inline-block', ...fills[k] });
+    const CUR = 9;
+    const meses = 'EFMAMJJASOND'.split('').map((l, n) => ({ l, cur:n === CUR, notCur:n !== CUR }));
+    const calRows = [['Siembra directa','siembra',[9,10]],['Almácigo','almacigo',[7,8,9]],['Trasplante','trasplante',[9,10,11]]].map(r => ({
+      label:r[0], cells:Array.from({ length:12 }, (_, n) => ({ height:22, borderRadius:4, ...(r[2].includes(n) ? fills[r[1]] : { background:'var(--surface-2)' }), ...(n === CUR ? { outline:'2px solid var(--ink)', outlineOffset:1 } : {}) }))
+    }));
+
+    const datos = [['Profundidad','0,5 a 1 cm'],['Entre plantas','45 a 60 cm'],['Entre hileras','80 a 100 cm'],['Germinación','6 a 12 días'],['En almácigo','45 a 60 días'],['Floración','~75 días'],['Cosecha desde','110 a 135 días'],['Temporada de cosecha','~9 semanas']]
+      .map((d, n) => ({ k:d[0], v:d[1], cellStyle:{ padding:'12px 14px', borderTop:n > 1 ? '1px solid var(--line)' : 'none', borderLeft:n % 2 ? '1px solid var(--line)' : 'none', display:'flex', flexDirection:'column', gap:2 } }));
+    const chip = link => ({ display:'flex', alignItems:'center', gap:4, minHeight:40, boxSizing:'border-box', padding:'0 12px 0 10px', borderRadius:999, background:'var(--surface)', border:'1px solid var(--line-strong)', color:'var(--ink)', fontSize:15, fontWeight:700, textDecoration:link ? 'underline' : 'none', textUnderlineOffset:3, pointerEvents:link ? 'auto' : 'none' });
+    const vecinasOk = [['Albahaca',1],['Lechuga',1],['Cilantro',1],['Zanahoria'],['Cebolla'],['Ajo'],['Perejil'],['Caléndula']].map(v => ({ n:v[0], link:!!v[1], style:chip(!!v[1]) }));
+    const vecinasNo = [['Papa'],['Hinojo'],['Repollo'],['Choclo',1]].map(v => ({ n:v[0], link:!!v[1], style:chip(!!v[1]) }));
+
+    const plagas = [
+      ['Tizón tardío','Manchas cafés y aceitosas en hojas y tallos que avanzan rápido con humedad y neblina costera.','Riega al pie, deja espacio entre plantas, retira hojas bajas y elimina (no compostes) las plantas enfermas.','Muy común en la costa'],
+      ['Polilla del tomate','Galerías transparentes dentro de las hojas y frutos con pequeñas perforaciones.','Retira hojas con galerías, usa trampas de feromona y Bacillus thuringiensis sobre larvas.'],
+      ['Mosquita blanca','Nubes de insectos blancos al mover la planta; hojas pegajosas.','Trampas cromáticas amarillas y jabón potásico en el envés de las hojas.'],
+      ['Pulgón','Colonias en brotes nuevos y hojas enrolladas.','Chorro de agua, jabón potásico; siembra albahaca o caléndula cerca.'],
+      ['Gusano del fruto','Frutos con agujeros redondos y excremento.','Revisa y retira larvas a mano; Bacillus thuringiensis en etapas tempranas.']
+    ].map((x, n) => { const open = s.plagaOpen === n; return { n:x[0], ve:x[1], hacer:x[2], tag:x[3] || '', open, expanded:open ? 'true' : 'false',
+      chevStyle:{ display:'flex', flex:'none', transition:'transform 200ms', transform:open ? 'rotate(180deg)' : 'none' },
+      toggle:() => this.setState(st => ({ plagaOpen:st.plagaOpen === n ? -1 : n })) }; });
+    const signos = ['Color pleno y uniforme según la variedad (rojo, amarillo, negro...).','Cede levemente al apretarlo con suavidad.','Se desprende fácil del racimo girándolo.',"Al final de temporada o con tizón, cosecha 'pintones' (con color iniciado): maduran bien dentro de la casa."];
+    const consejos = ['Al trasplantar, entierra parte del tallo: echa raíces nuevas y la planta queda más firme.',"Pon el tutor al trasplantar y elimina los brotes laterales ('chupones') en variedades de crecimiento indeterminado.",'Agrega compost al hoyo de plantación; evita exceso de nitrógeno, que da mucha hoja y poco fruto.'].map((t, n) => ({ n:n + 1, t }));
+
+    const TY = {
+      riego:{ label:'Riego', ic:'drop', bg:'var(--water-soft)', fg:'var(--water)' },
+      abono:{ label:'Abono', ic:'abono', bg:'var(--earth-soft)', fg:'var(--earth)' },
+      obs:{ label:'Observación', ic:'obs', bg:'var(--surface-2)', fg:'var(--ink)' },
+      plaga:{ label:'Plaga', ic:'bug', bg:'var(--danger-soft)', fg:'var(--danger)' },
+      cosecha:{ label:'Cosecha', ic:'basket', bg:'var(--sun)', fg:'var(--on-sun)' }
+    };
+    const PMB = 'Poroto mata baja · Bancal norte junto a la reja del patio';
+    const ent = (t, sp, crop, text, title) => ({ title:title || TY[t].label, glyph:this.glyph(sp,18), crop, text:text || '', icon:this.ico(TY[t].ic,22),
+      iconStyle:{ flex:'none', width:40, height:40, borderRadius:12, background:TY[t].bg, color:TY[t].fg, display:'grid', placeItems:'center' } });
+    const bitacora = [
+      { date:'Hoy · martes, 6 de octubre', items:[ent('obs','poroto_mb',PMB,'Ya asomaron casi todas; faltan dos en la punta del bancal. Revisar https://www.ejemplo-de-enlace-muy-largo-sin-espacios.cl/huerta/porotos/germinacion')] },
+      { date:'Ayer · lunes, 5 de octubre', items:[ent('riego','poroto_mb',PMB)] },
+      { date:'Domingo, 4 de octubre', items:[ent('cosecha','lechuga','Lechuga · Macetero cocina','Primeras hojas externas, muy crujientes.','Cosecha: 1,5 kg')] },
+      { date:'Sábado, 3 de octubre', items:[ent('plaga','choclo','Choclo','Tordos sacando semillas, puse malla.')] },
+      { date:'Viernes, 2 de octubre', items:[ent('riego','lechuga','Lechuga · Macetero cocina')] },
+      { date:'Jueves, 1 de octubre', items:[ent('abono','poroto_en','Poroto enredadera','Compost alrededor de la base.'), ent('riego','choclo','Choclo')] }
+    ].map(d => ({ ...d, items:d.items.map((e, n) => ({ ...e, notFirst:n > 0 })) }));
+
+    const tipos = ['riego','abono','obs','plaga','cosecha'].map(k => ({ label:TY[k].label, sel:s.tipo === k, unsel:s.tipo !== k, icon:this.ico(TY[k].ic,24),
+      iconColor:{ color:k === 'obs' ? 'var(--ink)' : k === 'cosecha' ? 'var(--earth)' : TY[k].fg, display:'flex' }, onPick:() => this.setState({ tipo:k }) }));
+
+    const nav = a => [['Inicio','home'],['Guía','book'],['Mis cultivos','sprout'],['Bitácora','notes']].map(x => ({ label:x[0], icon:this.ico(x[1],22), active:x[0] === a, inactive:x[0] !== a }));
+
+    const sev = { Alta:{ background:'#f6ddd6', color:'#7a2414' }, Media:{ background:'#f8e3a0', color:'#4a3200' }, Baja:{ background:'#ebe4d2', color:'#474f41' } };
+    const badge = k => ({ ...sev[k], fontSize:13, fontWeight:800, padding:'3px 10px', borderRadius:999, display:'inline-block' });
+    const fortalezas = [
+      'Contraste alto y texto base de 17 px: se lee bien al sol en ambos temas.',
+      'Zonas táctiles generosas (botones de 48 px) y opciones segmentadas con ✓, que no dependen solo del color.',
+      'Microcopy cercano y claro en español de Chile: «Regué hoy», «toca regar», «Hacer un respaldo».',
+      'La base crema, verde y tierra ya sugiere huerta; es el punto de partida correcto.',
+      'Contenido útil y local: calendario de Penco, plagas de la costa, señales de cosecha.'
+    ].map((t, n) => ({ n:n + 1, t }));
+    const problemas = [
+      ['Alta','Inicio','Lo urgente queda abajo: Choclo y Lechuga (5 y 4 días sin agua) son el 4.º y 5.º de la lista. Arriba, el aviso de respaldo y los 3 indicadores tienen el mismo peso.','No se entiende en 3 segundos qué toca hoy; hay que bajar cerca de 1.000 px para llegar a lo atrasado.'],
+      ['Alta','Inicio','Cinco tarjetas de riego con un botón «Regué hoy» grande cada una; el botón ocupa más que el nombre del cultivo.','Mucho scroll con una mano y la lista parece más larga de lo que es.'],
+      ['Alta','Mis cultivos','«Más» queda solo en una línea y las acciones ocupan dos filas.','Cada tarjeta suma ~60 px y se ve desordenada.'],
+      ['Alta','Mis cultivos','Barra de progreso y pasos repiten el mismo dato; las etiquetas de los pasos rondan los 11 px en gris.','Ilegible a pleno sol, y son dos elementos para una sola idea.'],
+      ['Media','Inicio','El aviso de respaldo tiene borde verde de 2 px y fondo verde: luce como la acción principal.','Compite con el riego y, al estar siempre visible, termina ignorándose.'],
+      ['Media','Inicio','Los avisos amarillos funcionan como resaltador dentro del texto y cortan «toca / regar» en dos líneas.','Se ve improvisado y no se lee de un vistazo.'],
+      ['Media','Ficha','Calendario con barras de ~6 px, meses en ~10 px y una leyenda diminuta; ocho cajas de datos con el mismo peso; plagas en un bloque continuo.','Cuesta ubicar el mes actual y escanear la ficha.'],
+      ['Media','Bitácora','«Editar» y «Eliminar» visibles en cada entrada; la URL larga se corta mal; mucho aire bajo cada tarjeta.','Riesgo de borrar sin querer con las manos sucias, y ruido visual.'],
+      ['Media','Nueva entrada','El texto de ayuda del detalle queda tapado por el pie fijo; el tipo elegido salta a una fila completa.','Se pierde la pista y el diseño se mueve al tocar.'],
+      ['Media','Global','El ícono de sol de la cabecera abre Ajustes.','Parece un botón para cambiar el tema; Ajustes cuesta encontrarlo.'],
+      ['Media','Global','Verde suave en botones, fondos de ícono, insignias, aviso y chips.','El verde deja de indicar algo concreto.'],
+      ['Media','Global · oscuro','Las tarjetas apenas se separan del fondo y el amarillo de aviso se vuelve un marrón apagado.','El tema oscuro se siente menos cuidado que el claro.'],
+      ['Media','Ajustes','«Borrar todos los datos» tiene el mismo estilo que un botón neutro.','Una acción destructiva sin ninguna señal visual.'],
+      ['Baja','Global','Emojis 3D junto a íconos de trazo; además cambian según el sistema (las capturas muestran los de Windows).','Dos lenguajes visuales; la identidad depende del teléfono.'],
+      ['Baja','Global','system-ui sin carácter, misma familia para títulos y texto.','La app se ve genérica.'],
+      ['Baja','Guía','«Qué hacer en octubre» repite la lista de especies de abajo y hay hasta 3 insignias apiladas por especie.','Más largo y ruidoso de lo necesario.']
+    ].map(x => ({ sev:x[0], sevStyle:badge(x[0]), pantalla:x[1], problema:x[2], porque:x[3] }));
+
+    const sw = hex => ({ height:48, borderRadius:10, background:hex, border:'1px solid rgba(0,0,0,.12)' });
+    const paletaA = [['Papel','#f4efe2'],['Tinta','#1b2417'],['Hoja','#2c6a2e'],['Agua','#255f7e'],['Tierra','#8a4a1f'],['Sol','#f8e3a0']].map(c => ({ n:c[0], hex:c[1], sw:sw(c[1]) }));
+    const paletaB = [['Fondo','#fbfaf7'],['Texto','#1d211e'],['Acento','#1f7a3a'],['Superficie','#eef0ec'],['Secundario','#5f6761'],['Aviso','#ffd75e']].map(c => ({ n:c[0], hex:c[1], sw:sw(c[1]) }));
+    const glifos = [['poroto_mb','Poroto mata baja'],['poroto_en','Poroto enredadera'],['tomate','Tomate'],['lechuga','Lechuga'],['zapallo','Zapallo italiano'],['choclo','Choclo'],['cilantro','Cilantro'],['albahaca','Albahaca']].map(x => ({ g:this.glyph(x[0],44), n:x[1] }));
+
+    const fmt = v => v.toFixed(1).replace('.', ',') + ':1';
+    const pairs = [
+      ['ink','bg','Texto principal sobre fondo','4,5:1'],['ink','surface','Texto principal sobre tarjeta','4,5:1'],['ink','surface2','Texto sobre superficie hundida','4,5:1'],
+      ['ink2','bg','Texto secundario sobre fondo','4,5:1'],['ink2','surface','Texto secundario sobre tarjeta','4,5:1'],['ink2','surface2','Texto secundario sobre superficie hundida','4,5:1'],
+      ['primary','surface','Enlace y número destacado','4,5:1'],['onPrimary','primary','Texto de botón primario','4,5:1'],['onPrimarySoft','primarySoft','Pestaña activa, insignia verde','4,5:1'],
+      ['onWaterSoft','waterSoft','Botón «Regué hoy»','4,5:1'],['onEarthSoft','earthSoft','Insignia de almácigo','4,5:1'],['onSun','sun','Aviso amarillo','4,5:1'],
+      ['danger','surface','Error, asterisco, ✕','4,5:1'],['lineStrong','surface','Borde de campo y botón secundario','3:1'],['lineStrong','bg','Borde de campo sobre fondo','3:1'],
+      ['earth','bg','Íconos de sección','3:1'],['water','surface','Íconos de riego','3:1'],['focus','bg','Anillo de foco','3:1']
+    ];
+    const swc = (fg, bg) => ({ display:'inline-grid', placeItems:'center', width:34, height:26, borderRadius:6, background:bg, color:fg, fontWeight:800, fontSize:14, border:'1px solid rgba(0,0,0,.15)' });
+    const contraste = pairs.map(x => {
+      const lv = this.cr(L[x[0]], L[x[1]]), dv = this.cr(D[x[0]], D[x[1]]), need = x[3] === '3:1' ? 3 : 4.5;
+      return { par:`--${this.kebab(x[0])} / --${this.kebab(x[1])}`, uso:x[2], min:x[3], l:(lv >= need ? '✓ ' : '✕ ') + fmt(lv), d:(dv >= need ? '✓ ' : '✕ ') + fmt(dv), lSw:swc(L[x[0]], L[x[1]]), dSw:swc(D[x[0]], D[x[1]]) };
+    });
+
+    const imp = { Alto:{ background:'#f6ddd6', color:'#7a2414' }, Medio:{ background:'#f8e3a0', color:'#4a3200' }, Bajo:{ background:'#ebe4d2', color:'#474f41' } };
+    const plan = [
+      ['Bajar el aviso de respaldo a una franja neutra debajo del riego (fondo --surface-2, ícono tierra, sin borde verde).','Alto','S','.backup-banner, vista Inicio'],
+      ['Acciones de la tarjeta de cultivo en una sola fila: grid 1fr 1fr 48px; «Más» como botón de ícono con aria-label.','Alto','S','.crop-card .actions, .btn-more'],
+      ['Texto mínimo de 14 px y secundario con --ink-2; quitar los grises claros de pasos, insignias y metadatos.','Alto','S','.steps li, .muted, .badge, .meta'],
+      ['Pegar los tokens nuevos y reemplazar los colores literales por variables.','Alto','M',':root, [data-theme="dark"], todo styles.css'],
+      ['Riego en una sola tarjeta con filas, ordenado por urgencia, botón compacto a la derecha y título que cuenta lo pendiente.','Alto','M','.watering-list, .watering-card, renderHome() en app.js'],
+      ['Fundir barra de progreso y pasos en una pista segmentada con ✓ y ●.','Alto','M','.progress, .steps, renderCropCard()'],
+      ['Azul agua para todo lo de riego; el verde queda para crecimiento y acción principal.','Medio','S','.btn-soft, .icon-water, .log-type-riego'],
+      ['Ícono de Ajustes: de sol a deslizadores, con aria-label «Ajustes».','Medio','S','.app-header .settings-btn'],
+      ['Tema oscuro: tarjetas con borde en vez de sombra y amarillo de aviso nuevo.','Medio','S','[data-theme="dark"] .card, .alert-warn'],
+      ['Diálogo: espacio inferior en el cuerpo para que el pie fijo no tape la ayuda; tipos en grid fijo de 3 columnas.','Medio','S','.sheet-body, .sheet-footer, .type-options'],
+      ['overflow-wrap: anywhere en el texto de las entradas.','Medio','S','.log-entry p'],
+      ['Botón de peligro para «Borrar todos los datos» (borde y texto --danger).','Medio','S','.btn-danger, vista Ajustes'],
+      ['Autoalojar Bitter y Atkinson Hyperlegible Next y agregarlas a la caché offline.','Medio','S','@font-face, body, h1–h3, service-worker.js'],
+      ['Bitácora: una tarjeta por día y Editar/Eliminar dentro de un menú ⋯ con confirmación.','Medio','M','.log-day, .log-entry .actions, .menu'],
+      ['Calendario de 3 filas con patrón por tipo y columna del mes actual.','Medio','M','.calendar, .calendar-row, .legend'],
+      ['«Cómo sembrar» en una tarjeta tipo tabla; plagas como <details> acordeón; vecinas con ✓ y ✕.','Medio','M','.facts-grid, .pests, .companions'],
+      ['Set de 8 glifos SVG de especies en lugar de emojis.','Medio','L','.species-icon, datos de especies en app.js'],
+      ['Microinteracciones de riego, etapa y cosecha, con prefers-reduced-motion.','Bajo','M','.btn-water, .steps, .toast']
+    ].map((x, n) => ({ n:n + 1, c:x[0], imp:x[1], impStyle:{ ...imp[x[1]], fontSize:13, fontWeight:800, padding:'3px 10px', borderRadius:999, display:'inline-block' }, e:x[2], s:x[3] }));
+
+    const micro = [
+      { t:'Al tocar «Regué hoy»', d:'El fondo del botón se llena de azul de abajo hacia arriba (280 ms), una gota cae dentro del ícono y el botón pasa a ✓. La fila cambia a «Regado hoy» y aparece un aviso «Riego anotado · Deshacer» por 5 segundos. Puedes probarlo en el mockup de Inicio.', r:'cambio inmediato de color y texto; el aviso se mantiene.' },
+      { t:'Al completar una etapa', d:'El tramo de la pista termina de llenarse (400 ms), el ✓ de la etiqueta aparece con una escala de 0,6 a 1 y la tarjeta se tiñe de verde suave por un instante.', r:'el tramo aparece lleno y el ✓ sin escala.' },
+      { t:'Al cosechar', d:'El ícono de canasta da un pequeño salto de 4 px (240 ms) y el aviso muestra la cantidad: «Cosecha anotada: 1,5 kg · Deshacer».', r:'sin salto; solo el aviso.' }
+    ];
+
+    return {
+      themes, lightVars:this.vars(L), i,
+      g:{ logo:this.glyph('logo',30), logo40:this.glyph('logo',40), tomate56:this.glyph('tomate',56), tomate64:this.glyph('tomate',64), lechuga56:this.glyph('lechuga',56), poroto_en56:this.glyph('poroto_en',56), zapallo24:this.glyph('zapallo',24) },
+      riego, riegoTitulo, waterAll, cosechas, sembrar, cultivos,
+      meses, calRows, legend, datos, vecinasOk, vecinasNo, plagas, signos, consejos,
+      bitacora, tipos, isCosecha:s.tipo === 'cosecha',
+      navInicio:nav('Inicio'), navCultivos:nav('Mis cultivos'), navGuia:nav('Guía'), navBitacora:nav('Bitácora'),
+      showFold:!!p.pliegue,
+      fortalezas, problemas, paletaA, paletaB, glifos, micro, contraste, plan,
+      tokensCss:this.genCss(),
+      copyLabel:s.copied ? '✓ Copiado' : 'Copiar',
+      copy:() => { try { navigator.clipboard.writeText(this.genCss()); } catch (e) {} this.setState({ copied:true }); setTimeout(() => this.setState({ copied:false }), 1800); }
+    };
+  }
+}
+</script>
+</body>
+</html>

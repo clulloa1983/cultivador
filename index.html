@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cultivador</title>
+  <meta name="description" content="Guía de cultivo y bitácora para tu huerta en casa.">
+  <meta name="theme-color" content="#2f6b2f" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121a12" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Cultivador">
+  <link rel="preload" href="fonts/atkinson-hyperlegible-next-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/bitter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Aplica el tema guardado antes de pintar para evitar parpadeo.
+    try {
+      var d = JSON.parse(localStorage.getItem('cultivador:v1'));
+      var t = d && d.preferencias && d.preferencias.tema;
+      if (t === 'claro' || t === 'oscuro') document.documentElement.dataset.theme = t === 'claro' ? 'light' : 'dark';
+    } catch (e) {}
+  </script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="saltar" href="#vista">Saltar al contenido</a>
+
+  <!-- Íconos (decorativos: se usan con aria-hidden) -->
+  <svg xmlns="http://www.w3.org/2000/svg" hidden>
+    <symbol id="i-inicio" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 10v9.5h13V10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 19.5v-4c0-1.6 1.2-3 3-3.3-.1 2-1.3 3.3-3 3.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-guia" viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5v-13ZM20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5v-13Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M15.5 13.5c0-2.5 1.5-4 3-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-cultivos" viewBox="0 0 24 24"><path d="M12 21v-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 12c0-4 2.5-7 7-7 0 4.5-3 7-7 7ZM12 14.5C12 11 9.8 8.5 5 8.5c0 4 2.7 6 7 6Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M6 21h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-bitacora" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 8h6M9 12h6M9 16h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-ajustes" viewBox="0 0 24 24"><path d="M4 7h8.5M17.5 7H20M4 17h2.5M11.5 17H20M15 4.8a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4zM9 14.8a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-gota" viewBox="0 0 24 24"><path d="M12 3.5s6 6.4 6 10.8a6 6 0 0 1-12 0C6 9.9 12 3.5 12 3.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9.5 14.5a2.6 2.6 0 0 0 2.5 2.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-mas" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-volver" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-calendario" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 10h17M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-cosecha" viewBox="0 0 24 24"><path d="M4 10h16l-1.6 8.4a2 2 0 0 1-2 1.6H7.6a2 2 0 0 1-2-1.6L4 10Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 10 11 4.5M15.5 10 13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-alerta" viewBox="0 0 24 24"><path d="M12 3.5 21.5 20h-19L12 3.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5M12 17.2v.1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-descargar" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-subir" viewBox="0 0 24 24"><path d="M12 15.5v-11M7 9l5-5 5 5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-abono" viewBox="0 0 24 24"><path d="M3 20h18M5 20c1-4 4-6.5 7-6.5s6 2.5 7 6.5M12 13.5V9M12 9c-1.8-2.4-4-3-6-2.2 1 2.4 3.5 3 6 2.2zM12 9c1.5-2 3.4-2.5 5-1.8-.8 2-3 2.5-5 1.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ojo" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12zM12 9.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bicho" viewBox="0 0 24 24"><path d="M8 9.5h8v4.5a4 4 0 0 1-8 0zM9.5 9.5a2.5 2.5 0 0 1 5 0M3.5 12.5H8M16 12.5h4.5M5 7l3 2.5M19 7l-3 2.5M5 19l3-2.5M19 19l-3-2.5M12 9.5V18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <!-- Glifos de especies -->
+    <symbol id="g-logo" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M7 27c1.5-4.5 5-7 9-7s7.5 2.5 9 7z" fill="#9a5a32"/><path d="M16 20v-7"/><path d="M16 13c0-4-3-6.5-8-6.5 0 4.5 3.5 6.5 8 6.5z" fill="#6fb245"/><path d="M16 14c.5-4 3.5-6.5 8-6 0 4-3.5 6.5-8 6z" fill="#8cc95c"/></g></symbol>
+    <symbol id="g-tomate" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><ellipse cx="16" cy="19" rx="11" ry="9.5" fill="#d94a3a"/><path d="M10 11.5l3.6 1.3L16 9.5l2.4 3.3 3.6-1.3-2.4 3.2h-7.2z" fill="#5f9e3c"/><path d="M16 9.5V6"/><path d="M9.5 19a6.5 6.5 0 0 1 3-4.8" stroke="#fff" stroke-opacity=".8" stroke-width="1.5"/></g></symbol>
+    <symbol id="g-lechuga" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M16 27c-6.1 0-11-3.9-11-9.3 0-2.9 1.5-5 3.6-6 0-3 2.4-5.4 5-5.4 1 0 1.7.3 2.4.8.7-.5 1.4-.8 2.4-.8 2.6 0 5 2.4 5 5.4 2.1 1 3.6 3.1 3.6 6C27 23.1 22.1 27 16 27z" fill="#7fbf4d"/><path d="M16 27V13M16 21l-4.5-3.5M16 17.5l4.5-3.5M16 24l4-3"/></g></symbol>
+    <symbol id="g-poroto-mata-baja" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><ellipse cx="11.5" cy="12" rx="5" ry="7" transform="rotate(-30 11.5 12)" fill="#9b3a4a"/><ellipse cx="20.5" cy="20" rx="5" ry="7" transform="rotate(25 20.5 20)" fill="#b0485a"/><path d="M9.6 10a3 3 0 0 1 2.6-1.8" stroke="#fff" stroke-opacity=".75" stroke-width="1.5"/><path d="M19.4 16.6a3 3 0 0 1 2.7.1" stroke="#fff" stroke-opacity=".75" stroke-width="1.5"/></g></symbol>
+    <symbol id="g-poroto-enredadera" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M5 25c3.5-.8 6.5-3.8 9.5-8s6-8 11.5-10c.8 3.4-1.2 8-4.5 11.5S11.5 26.5 5 25z" fill="#6aa83f"/><circle cx="11" cy="21" r="2" fill="#b5dd7c" stroke-width="1.2"/><circle cx="15.5" cy="16.5" r="2" fill="#b5dd7c" stroke-width="1.2"/><circle cx="20" cy="12" r="2" fill="#b5dd7c" stroke-width="1.2"/><path d="M26 7l2-2.5"/></g></symbol>
+    <symbol id="g-zapallo-italiano" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><rect x="4.5" y="11.75" width="23" height="8.5" rx="4.25" transform="rotate(-35 16 16)" fill="#4f8a3a"/><path d="M8.5 16h14" transform="rotate(-35 16 16)" stroke="#b2d98a" stroke-width="1.5"/><path d="M25.2 9.4l2.6-2.2"/></g></symbol>
+    <symbol id="g-choclo" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><ellipse cx="16" cy="13" rx="5.5" ry="9" fill="#f2c230"/><path d="M13.2 6v13.5M16 4.2v15.8M18.8 6v13.5M11 9.5h10M10.6 13.5h10.8M11.2 17.5h9.6" stroke="#a67a0a" stroke-width="1"/><path d="M16 28c-5.2-.8-9.2-5.6-9.5-12 3.3 1.8 5.6 5 6.6 9z" fill="#6aa83f"/><path d="M16 28c5.2-.8 9.2-5.6 9.5-12-3.3 1.8-5.6 5-6.6 9z" fill="#5a9636"/></g></symbol>
+    <symbol id="g-cilantro" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M16 28V9M16 21l-5.5-4.5M16 17l5.5-4.5M16 13.5l-3-2.8"/><circle cx="9.5" cy="15.5" r="3.3" fill="#6db04a"/><circle cx="22.5" cy="11.5" r="3.3" fill="#6db04a"/><circle cx="16" cy="7.5" r="3" fill="#7cc057"/><circle cx="12" cy="10" r="2.4" fill="#7cc057"/></g></symbol>
+    <symbol id="g-albahaca" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M16 16.5v-4"/><path d="M16 13c-.6-4.2-3.6-6.5-8-6.5.2 4.3 3.4 6.5 8 6.5z" fill="#5aa845"/><path d="M16 12.5c.8-4.8 4-7.6 9-7.5-.2 4.8-3.8 7.6-9 7.5z" fill="#4c9a3a"/><path d="M10 19.5h12l-1.8 8h-8.4z" fill="#c8693c"/><rect x="8.5" y="16.5" width="15" height="3.5" rx="1.2" fill="#dd8455"/></g></symbol>
+    <symbol id="i-opciones" viewBox="0 0 24 24"><path d="M5.5 12h.01M12 12h.01M18.5 12h.01" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <header class="cabecera">
+    <a class="marca" href="#/inicio">
+      <svg class="marca-logo" aria-hidden="true" focusable="false"><use href="#g-logo"/></svg>
+      <span>Cultivador</span>
+    </a>
+    <a class="boton-icono" href="#/ajustes" id="enlace-ajustes">
+      <svg aria-hidden="true" focusable="false"><use href="#i-ajustes"/></svg>
+      <span class="sr">Ajustes y respaldo</span>
+    </a>
+  </header>
+
+  <main id="vista" tabindex="-1">
+    <p class="cargando">Cargando…</p>
+  </main>
+
+  <nav class="nav-inferior" aria-label="Principal">
+    <ul>
+      <li><a href="#/inicio" data-ruta="inicio"><span class="nav-ico"><svg aria-hidden="true" focusable="false"><use href="#i-inicio"/></svg></span><span>Inicio</span></a></li>
+      <li><a href="#/guia" data-ruta="guia"><span class="nav-ico"><svg aria-hidden="true" focusable="false"><use href="#i-guia"/></svg></span><span>Guía</span></a></li>
+      <li><a href="#/cultivos" data-ruta="cultivos"><span class="nav-ico"><svg aria-hidden="true" focusable="false"><use href="#i-cultivos"/></svg></span><span>Mis cultivos</span></a></li>
+      <li><a href="#/bitacora" data-ruta="bitacora"><span class="nav-ico"><svg aria-hidden="true" focusable="false"><use href="#i-bitacora"/></svg></span><span>Bitácora</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- Avisos breves (toast) y anuncios para lectores de pantalla -->
+  <div class="toast-zona" id="toast-zona"></div>
+  <div class="sr" id="anunciador" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Diálogo: crear / editar cultivo -->
+  <dialog id="dlg-cultivo" class="dialogo" aria-labelledby="dlg-cultivo-titulo">
+    <form id="form-cultivo" novalidate>
+      <div class="dialogo-cabecera">
+        <h2 id="dlg-cultivo-titulo">Nuevo cultivo</h2>
+        <button type="button" class="boton-icono" data-cerrar>
+          <svg aria-hidden="true" focusable="false"><use href="#i-cerrar"/></svg>
+          <span class="sr">Cerrar</span>
+        </button>
+      </div>
+      <div class="dialogo-cuerpo">
+        <input type="hidden" name="id">
+        <div class="campo">
+          <label for="c-especie">Especie <span class="req" aria-hidden="true">*</span></label>
+          <select id="c-especie" name="especieId" required aria-describedby="c-especie-error"></select>
+          <p class="error" id="c-especie-error"></p>
+        </div>
+        <div class="campo">
+          <label for="c-apodo">Nombre o apodo <span class="opcional">(opcional)</span></label>
+          <input id="c-apodo" name="apodo" type="text" maxlength="40" autocomplete="off" aria-describedby="c-apodo-ayuda">
+          <p class="ayuda" id="c-apodo-ayuda">Por ejemplo: «Bancal del fondo» o «Tanda 2».</p>
+        </div>
+        <fieldset class="campo">
+          <legend>Método de siembra</legend>
+          <div class="opciones-seg">
+            <label><input type="radio" name="metodo" value="directa" checked><span>Siembra directa</span></label>
+            <label><input type="radio" name="metodo" value="almacigo"><span>Almácigo</span></label>
+          </div>
+          <p class="ayuda" id="c-metodo-ayuda"></p>
+        </fieldset>
+        <div class="campo">
+          <label for="c-fecha">Fecha de siembra <span class="req" aria-hidden="true">*</span></label>
+          <input id="c-fecha" name="fechaSiembra" type="date" required aria-describedby="c-fecha-error">
+          <p class="error" id="c-fecha-error"></p>
+        </div>
+        <div class="campo" id="campo-trasplante" hidden>
+          <label for="c-trasplante">Fecha de trasplante <span class="opcional">(opcional)</span></label>
+          <input id="c-trasplante" name="fechaTrasplante" type="date" aria-describedby="c-trasplante-ayuda c-trasplante-error">
+          <p class="ayuda" id="c-trasplante-ayuda">Complétala cuando pases las plantas a su lugar definitivo.</p>
+          <p class="error" id="c-trasplante-error"></p>
+        </div>
+        <fieldset class="campo">
+          <legend>Ubicación</legend>
+          <div class="opciones-seg">
+            <label><input type="radio" name="ubicacion" value="macetero"><span>Macetero</span></label>
+            <label><input type="radio" name="ubicacion" value="bancal" checked><span>Bancal</span></label>
+            <label><input type="radio" name="ubicacion" value="suelo"><span>Suelo</span></label>
+          </div>
+        </fieldset>
+        <div class="campo">
+          <label for="c-notas">Notas <span class="opcional">(opcional)</span></label>
+          <textarea id="c-notas" name="notas" rows="3" maxlength="1000"></textarea>
+        </div>
+      </div>
+      <div class="dialogo-pie">
+        <button type="button" class="boton secundario" data-cerrar>Cancelar</button>
+        <button type="submit" class="boton primario">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Diálogo: crear / editar entrada de bitácora -->
+  <dialog id="dlg-entrada" class="dialogo" aria-labelledby="dlg-entrada-titulo">
+    <form id="form-entrada" novalidate>
+      <div class="dialogo-cabecera">
+        <h2 id="dlg-entrada-titulo">Nueva entrada</h2>
+        <button type="button" class="boton-icono" data-cerrar>
+          <svg aria-hidden="true" focusable="false"><use href="#i-cerrar"/></svg>
+          <span class="sr">Cerrar</span>
+        </button>
+      </div>
+      <div class="dialogo-cuerpo">
+        <input type="hidden" name="id">
+        <div class="campo">
+          <label for="e-cultivo">Cultivo <span class="req" aria-hidden="true">*</span></label>
+          <select id="e-cultivo" name="cultivoId" required aria-describedby="e-cultivo-error"></select>
+          <p class="error" id="e-cultivo-error"></p>
+        </div>
+        <fieldset class="campo">
+          <legend>Tipo</legend>
+          <div class="opciones-tipo">
+            <label><input type="radio" name="tipo" value="riego" checked><span><svg class="tipo-riego" aria-hidden="true" focusable="false"><use href="#i-gota"/></svg>Riego</span></label>
+            <label><input type="radio" name="tipo" value="abono"><span><svg class="tipo-abono" aria-hidden="true" focusable="false"><use href="#i-abono"/></svg>Abono</span></label>
+            <label><input type="radio" name="tipo" value="observacion"><span><svg class="tipo-observacion" aria-hidden="true" focusable="false"><use href="#i-ojo"/></svg>Observación</span></label>
+            <label><input type="radio" name="tipo" value="plaga"><span><svg class="tipo-plaga" aria-hidden="true" focusable="false"><use href="#i-bicho"/></svg>Plaga</span></label>
+            <label><input type="radio" name="tipo" value="cosecha"><span><svg class="tipo-cosecha" aria-hidden="true" focusable="false"><use href="#i-cosecha"/></svg>Cosecha</span></label>
+          </div>
+        </fieldset>
+        <div class="campo">
+          <label for="e-fecha">Fecha <span class="req" aria-hidden="true">*</span></label>
+          <input id="e-fecha" name="fecha" type="date" required aria-describedby="e-fecha-error">
+          <p class="error" id="e-fecha-error"></p>
+        </div>
+        <div class="campo-doble" id="campo-cantidad" hidden>
+          <div class="campo">
+            <label for="e-cantidad">Cantidad <span class="opcional">(opcional)</span></label>
+            <input id="e-cantidad" name="cantidad" type="text" inputmode="decimal" autocomplete="off" maxlength="10" aria-describedby="e-cantidad-error">
+            <p class="error" id="e-cantidad-error"></p>
+          </div>
+          <div class="campo">
+            <label for="e-unidad">Unidad</label>
+            <select id="e-unidad" name="unidad">
+              <option value="g">gramos</option>
+              <option value="kg">kilos</option>
+              <option value="unidades">unidades</option>
+              <option value="atados">atados</option>
+            </select>
+          </div>
+        </div>
+        <div class="campo">
+          <label for="e-texto">Detalle <span class="opcional">(opcional)</span></label>
+          <textarea id="e-texto" name="texto" rows="4" maxlength="2000" aria-describedby="e-texto-ayuda"></textarea>
+          <p class="ayuda" id="e-texto-ayuda">¿Qué viste o hiciste? Ej.: «Primeras flores moradas».</p>
+        </div>
+      </div>
+      <div class="dialogo-pie">
+        <button type="button" class="boton secundario" data-cerrar>Cancelar</button>
+        <button type="submit" class="boton primario">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Diálogo: confirmación -->
+  <dialog id="dlg-confirmar" class="dialogo dialogo-chico" aria-labelledby="dlg-confirmar-titulo" aria-describedby="dlg-confirmar-texto">
+    <form method="dialog">
+      <div class="dialogo-cuerpo">
+        <h2 id="dlg-confirmar-titulo">¿Confirmar?</h2>
+        <p id="dlg-confirmar-texto"></p>
+      </div>
+      <div class="dialogo-pie" id="dlg-confirmar-botones">
+        <button value="cancelar" class="boton secundario" autofocus>Cancelar</button>
+        <button value="aceptar" class="boton peligro">Aceptar</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

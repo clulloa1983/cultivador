@@ -1,0 +1,390 @@
+{
+  "version": 1,
+  "zona": "Penco y costa del Biobío (clima mediterráneo costero, heladas escasas entre junio y agosto)",
+  "especies": [
+    {
+      "id": "poroto-mata-baja",
+      "nombre": "Poroto verde de mata baja",
+      "nombreCorto": "Poroto mata baja",
+      "nombreCientifico": "Phaseolus vulgaris (tipo arbustivo)",
+      "icono": "🫘",
+      "descripcion": "Planta compacta de unos 40 a 50 cm que no necesita tutor. Produce casi toda su cosecha en 3 a 4 semanas, ideal para sembrar de forma escalonada.",
+      "siembra": {
+        "metodos": ["directa"],
+        "metodoRecomendado": "directa",
+        "mesesDirecta": [10, 11, 12, 1],
+        "mesesAlmacigo": [],
+        "mesesTrasplante": [],
+        "notas": "Siembra cuando el suelo esté sobre 15 °C (en Penco, desde mediados de octubre). Siembra un poco cada 3 semanas hasta enero para tener porotos verdes todo el verano."
+      },
+      "profundidadCm": [3, 4],
+      "distanciaCm": { "plantas": [8, 10], "hileras": [40, 50] },
+      "diasGerminacion": [7, 10],
+      "diasAlmacigo": null,
+      "diasFloracion": 40,
+      "diasCosecha": [55, 65],
+      "ventanaCosechaDias": 25,
+      "sol": { "nivel": "pleno", "texto": "Pleno sol: al menos 6 horas de sol directo al día." },
+      "riego": {
+        "texto": "Mantén el suelo húmedo pero sin encharcar. No riegues en exceso antes de que germine (la semilla se pudre). Riega más en floración y formación de vainas. Riega al pie, sin mojar las hojas.",
+        "frecuencia": "Cada 2 a 3 días en verano",
+        "diasAlerta": 3
+      },
+      "companeras": ["choclo", "zapallo-italiano", "lechuga", "Zanahoria", "Pepino", "Frutilla", "Papa"],
+      "incompatibles": ["Cebolla", "Ajo", "Puerro", "Ciboulette", "Hinojo"],
+      "plagas": [
+        { "nombre": "Mosca de la semilla", "senal": "Las semillas no germinan o salen plántulas sin hojas, con galerías en el tallo.", "manejo": "No siembres en suelo frío ni con guano fresco. Espera a que el suelo se entibie y vuelve a sembrar los espacios vacíos." },
+        { "nombre": "Babosas y caracoles", "senal": "Plántulas recién nacidas comidas durante la noche, con rastros brillantes de baba.", "manejo": "Recógelos al atardecer, usa trampas con cerveza o barreras de ceniza o cáscara de huevo molida alrededor." },
+        { "nombre": "Pulgón negro", "senal": "Colonias de insectos pequeños y oscuros en brotes y bajo las hojas; hojas enrolladas.", "manejo": "Lava con un chorro de agua o aplica jabón potásico. Las chinitas se los comen: no las elimines." },
+        { "nombre": "Arañita roja", "senal": "Hojas con puntitos amarillos y finas telarañas, sobre todo con calor seco.", "manejo": "Moja el envés de las hojas temprano en la mañana y elimina las hojas muy dañadas." },
+        { "nombre": "Oídio y roya", "senal": "Polvillo blanco (oídio) o pústulas color óxido (roya) sobre las hojas.", "manejo": "Deja espacio entre plantas para que circule el aire, riega al pie y retira hojas afectadas." }
+      ],
+      "senalesCosecha": [
+        "Vainas firmes y crujientes que se quiebran con un 'clic' al doblarlas.",
+        "Grosor parecido a un lápiz, con los granos aún sin marcarse en la vaina.",
+        "Cosecha cada 2 o 3 días: mientras más cosechas, más produce.",
+        "Si la vaina muestra bultos de granos o está fibrosa, ya se pasó (déjala para semilla)."
+      ],
+      "consejos": [
+        "No necesita abono nitrogenado: los porotos fijan su propio nitrógeno.",
+        "Remojar la semilla 2 a 4 horas antes de sembrar acelera la germinación, pero no más de eso.",
+        "Corta las vainas con tijera o sujeta la rama al tirar para no arrancar la planta."
+      ]
+    },
+    {
+      "id": "poroto-enredadera",
+      "nombre": "Poroto verde de enredadera",
+      "nombreCorto": "Poroto enredadera",
+      "nombreCientifico": "Phaseolus vulgaris (tipo trepador)",
+      "icono": "🫛",
+      "descripcion": "Trepa hasta 2 o 3 metros y necesita tutor (cañas, malla o cordeles). Tarda más que el de mata baja, pero produce durante más tiempo y aprovecha mejor el espacio.",
+      "siembra": {
+        "metodos": ["directa"],
+        "metodoRecomendado": "directa",
+        "mesesDirecta": [10, 11, 12],
+        "mesesAlmacigo": [],
+        "mesesTrasplante": [],
+        "notas": "Instala el tutor antes de sembrar para no dañar las raíces después. En Penco protege la estructura del viento sur de la tarde."
+      },
+      "profundidadCm": [3, 4],
+      "distanciaCm": { "plantas": [15, 20], "hileras": [70, 90] },
+      "diasGerminacion": [7, 10],
+      "diasAlmacigo": null,
+      "diasFloracion": 55,
+      "diasCosecha": [65, 80],
+      "ventanaCosechaDias": 50,
+      "sol": { "nivel": "pleno", "texto": "Pleno sol: al menos 6 horas de sol directo. Orienta las hileras de norte a sur para que no se den sombra." },
+      "riego": {
+        "texto": "Riego regular y profundo; por su tamaño consume más agua que el de mata baja, sobre todo en floración. Evita mojar el follaje.",
+        "frecuencia": "Cada 2 días en verano",
+        "diasAlerta": 3
+      },
+      "companeras": ["choclo", "zapallo-italiano", "lechuga", "Zanahoria", "Pepino", "Rabanito"],
+      "incompatibles": ["Cebolla", "Ajo", "Puerro", "Remolacha", "Hinojo"],
+      "plagas": [
+        { "nombre": "Mosca de la semilla", "senal": "Semillas que no nacen o plántulas deformes con el tallo perforado.", "manejo": "Siembra con el suelo tibio y sin guano fresco; resiembra los espacios vacíos." },
+        { "nombre": "Babosas y caracoles", "senal": "Hojas y brotes tiernos comidos de noche.", "manejo": "Recolección al atardecer, trampas con cerveza y barreras de ceniza." },
+        { "nombre": "Pulgón negro", "senal": "Brotes con colonias de insectos oscuros y hojas pegajosas.", "manejo": "Chorro de agua o jabón potásico; favorece a las chinitas." },
+        { "nombre": "Arañita roja", "senal": "Hojas amarillentas con puntitos y telarañas finas.", "manejo": "Aumenta la humedad mojando el envés de las hojas temprano." }
+      ],
+      "senalesCosecha": [
+        "Vainas lisas, firmes y crujientes, del largo típico de la variedad (unos 15 a 20 cm).",
+        "Los granos todavía no se notan a través de la vaina.",
+        "Cosecha cada 2 o 3 días; si dejas madurar vainas, la planta deja de producir."
+      ],
+      "consejos": [
+        "Guía los primeros zarcillos hacia el tutor en sentido contrario a las agujas del reloj.",
+        "Cuando la planta llegue a lo alto del tutor, despunta la guía para que ramifique.",
+        "Choclo + poroto + zapallo son las 'tres hermanas': el choclo sirve de tutor."
+      ]
+    },
+    {
+      "id": "tomate",
+      "nombre": "Tomate",
+      "nombreCorto": "Tomate",
+      "nombreCientifico": "Solanum lycopersicum",
+      "icono": "🍅",
+      "descripcion": "Necesita calor y un ciclo largo. En la costa del Biobío conviene hacer almácigo protegido a fines de invierno y trasplantar cuando ya no hay riesgo de heladas.",
+      "siembra": {
+        "metodos": ["almacigo", "directa"],
+        "metodoRecomendado": "almacigo",
+        "mesesDirecta": [10, 11],
+        "mesesAlmacigo": [8, 9, 10],
+        "mesesTrasplante": [10, 11, 12],
+        "notas": "Almácigo en interior o invernadero en agosto y septiembre; trasplante desde mediados de octubre. La siembra directa es posible en octubre y noviembre, pero la cosecha empieza más tarde."
+      },
+      "profundidadCm": [0.5, 1],
+      "distanciaCm": { "plantas": [45, 60], "hileras": [80, 100] },
+      "diasGerminacion": [6, 12],
+      "diasAlmacigo": [45, 60],
+      "diasFloracion": 75,
+      "diasCosecha": [110, 135],
+      "ventanaCosechaDias": 60,
+      "sol": { "nivel": "pleno", "texto": "Pleno sol: 8 horas o más. En un lugar protegido del viento maduran mejor." },
+      "riego": {
+        "texto": "Riego profundo y regular, siempre al pie. Los cambios bruscos de humedad causan frutos partidos y la 'pudrición apical' (mancha negra en la punta). Mojar las hojas favorece el tizón.",
+        "frecuencia": "Cada 2 a 3 días en verano",
+        "diasAlerta": 3
+      },
+      "companeras": ["albahaca", "lechuga", "cilantro", "Zanahoria", "Cebolla", "Ajo", "Perejil", "Caléndula"],
+      "incompatibles": ["Papa", "Hinojo", "Repollo", "choclo"],
+      "plagas": [
+        { "nombre": "Tizón tardío", "senal": "Manchas cafés y aceitosas en hojas y tallos que avanzan rápido con humedad y neblina costera.", "manejo": "Riega al pie, deja espacio entre plantas, retira hojas bajas y elimina (no compostes) las plantas enfermas. Muy común en la costa." },
+        { "nombre": "Polilla del tomate", "senal": "Galerías transparentes dentro de las hojas y frutos con pequeñas perforaciones.", "manejo": "Retira hojas con galerías, usa trampas de feromona y Bacillus thuringiensis sobre larvas." },
+        { "nombre": "Mosquita blanca", "senal": "Nubes de insectos blancos al mover la planta; hojas pegajosas.", "manejo": "Trampas cromáticas amarillas y jabón potásico en el envés de las hojas." },
+        { "nombre": "Pulgón", "senal": "Colonias en brotes nuevos y hojas enrolladas.", "manejo": "Chorro de agua, jabón potásico; siembra albahaca o caléndula cerca." },
+        { "nombre": "Gusano del fruto", "senal": "Frutos con agujeros redondos y excremento.", "manejo": "Revisa y retira larvas a mano; Bacillus thuringiensis en etapas tempranas." }
+      ],
+      "senalesCosecha": [
+        "Color pleno y uniforme según la variedad (rojo, amarillo, negro…).",
+        "Cede levemente al apretarlo con suavidad.",
+        "Se desprende fácil del racimo girándolo.",
+        "Al final de temporada o con tizón, cosecha 'pintones' (con color iniciado): maduran bien dentro de la casa."
+      ],
+      "consejos": [
+        "Al trasplantar, entierra parte del tallo: echa raíces nuevas y la planta queda más firme.",
+        "Pon el tutor al trasplantar y elimina los brotes laterales ('chupones') en variedades de crecimiento indeterminado.",
+        "Agrega compost al hoyo de plantación; evita exceso de nitrógeno, que da mucha hoja y poco fruto."
+      ]
+    },
+    {
+      "id": "lechuga",
+      "nombre": "Lechuga",
+      "nombreCorto": "Lechuga",
+      "nombreCientifico": "Lactuca sativa",
+      "icono": "🥬",
+      "descripcion": "Cultivo rápido y fácil. En la costa de Penco se puede sembrar casi todo el año gracias al clima templado; en pleno verano elige variedades resistentes a la subida a flor.",
+      "siembra": {
+        "metodos": ["directa", "almacigo"],
+        "metodoRecomendado": "almacigo",
+        "mesesDirecta": [8, 9, 10, 11, 12, 1, 2, 3, 4],
+        "mesesAlmacigo": [7, 8, 9, 10, 11, 12, 1, 2, 3, 4],
+        "mesesTrasplante": [8, 9, 10, 11, 12, 1, 2, 3, 4, 5],
+        "notas": "Siembra pequeñas cantidades cada 2 o 3 semanas para tener lechugas siempre. En verano, siembra en semisombra; en invierno crece lento."
+      },
+      "profundidadCm": [0.3, 0.5],
+      "distanciaCm": { "plantas": [25, 30], "hileras": [30, 35] },
+      "diasGerminacion": [4, 10],
+      "diasAlmacigo": [25, 35],
+      "diasFloracion": null,
+      "diasCosecha": [55, 75],
+      "ventanaCosechaDias": 20,
+      "sol": { "nivel": "medio", "texto": "Sol o media sombra. En verano agradece sombra en las horas de más calor." },
+      "riego": {
+        "texto": "Raíces superficiales: necesita riego frecuente y ligero. La falta de agua la vuelve amarga y la hace espigarse.",
+        "frecuencia": "Diario o día por medio en verano",
+        "diasAlerta": 2
+      },
+      "companeras": ["Rabanito", "Zanahoria", "Frutilla", "Pepino", "Cebolla", "poroto-mata-baja", "tomate"],
+      "incompatibles": ["Perejil", "Apio"],
+      "plagas": [
+        { "nombre": "Babosas y caracoles", "senal": "Hojas con agujeros irregulares y rastros de baba, sobre todo tras lluvia o riego.", "manejo": "Recolección nocturna, trampas con cerveza y barreras secas (ceniza, aserrín)." },
+        { "nombre": "Pulgón", "senal": "Insectos verdes o grises en el cogollo y hojas deformadas.", "manejo": "Lava con agua; jabón potásico si la colonia crece." },
+        { "nombre": "Gusano cortador", "senal": "Plantas cortadas a ras de suelo de un día para otro.", "manejo": "Escarba alrededor de la planta en la mañana y retira las larvas; collar de cartón al trasplantar." },
+        { "nombre": "Pudrición (Botrytis)", "senal": "Hojas basales blandas con moho gris.", "manejo": "No riegues de noche ni mojes el follaje; deja espacio entre plantas." }
+      ],
+      "senalesCosecha": [
+        "Hojas del tamaño típico de la variedad, firmes y crujientes.",
+        "En lechugas de cabeza, el cogollo se siente firme al presionarlo.",
+        "Cosecha antes de que el centro empiece a alargarse (espigarse): después se pone amarga.",
+        "Cosecha temprano en la mañana, cuando está más fresca."
+      ],
+      "consejos": [
+        "La semilla necesita luz para germinar: cúbrela apenas con una capa muy fina de tierra.",
+        "Puedes cosechar hoja por hoja (las externas) y la planta sigue produciendo.",
+        "Con calor sobre 25 °C la semilla germina mal: siembra al atardecer y mantén húmedo."
+      ]
+    },
+    {
+      "id": "zapallo-italiano",
+      "nombre": "Zapallo italiano",
+      "nombreCorto": "Zapallo italiano",
+      "nombreCientifico": "Cucurbita pepo",
+      "icono": "🥒",
+      "descripcion": "Muy productivo: dos o tres plantas bastan para una familia. Ocupa bastante espacio y necesita calor para cuajar bien sus frutos.",
+      "siembra": {
+        "metodos": ["directa", "almacigo"],
+        "metodoRecomendado": "directa",
+        "mesesDirecta": [10, 11, 12],
+        "mesesAlmacigo": [9, 10],
+        "mesesTrasplante": [10, 11],
+        "notas": "Siembra 2 o 3 semillas por hoyo y deja la plántula más vigorosa. Si haces almácigo, usa vasos individuales porque no le gusta que le muevan las raíces."
+      },
+      "profundidadCm": [2, 3],
+      "distanciaCm": { "plantas": [80, 100], "hileras": [100, 120] },
+      "diasGerminacion": [5, 10],
+      "diasAlmacigo": [20, 30],
+      "diasFloracion": 42,
+      "diasCosecha": [50, 60],
+      "ventanaCosechaDias": 60,
+      "sol": { "nivel": "pleno", "texto": "Pleno sol, al menos 6 a 8 horas diarias." },
+      "riego": {
+        "texto": "Riego abundante y profundo al pie de la planta. Mojar las hojas favorece el oídio. Aumenta el riego cuando hay frutos.",
+        "frecuencia": "Cada 2 a 3 días en verano",
+        "diasAlerta": 3
+      },
+      "companeras": ["choclo", "poroto-mata-baja", "poroto-enredadera", "Capuchina", "Rabanito", "Maravilla"],
+      "incompatibles": ["Papa", "Hinojo"],
+      "plagas": [
+        { "nombre": "Oídio", "senal": "Polvillo blanco sobre las hojas, muy común desde mediados del verano.", "manejo": "Riega al pie, retira hojas muy afectadas; una mezcla de 1 parte de leche en 9 de agua ayuda a frenarlo." },
+        { "nombre": "Babosas y caracoles", "senal": "Plántulas comidas y frutos pequeños dañados.", "manejo": "Recolección al atardecer y barreras de ceniza." },
+        { "nombre": "Pulgón y mosquita blanca", "senal": "Hojas enrolladas, pegajosas o con insectos en el envés.", "manejo": "Jabón potásico y trampas amarillas." },
+        { "nombre": "Frutos que se pudren en la punta", "senal": "Frutos pequeños que se ablandan y caen.", "manejo": "Suele ser falta de polinización: planta flores cerca para atraer abejas o poliniza a mano con un pincel." }
+      ],
+      "senalesCosecha": [
+        "Frutos de 15 a 20 cm de largo, con piel brillante y tierna.",
+        "La uña marca fácilmente la piel.",
+        "Cosecha cada 2 días: si crecen demasiado se vuelven fibrosos y la planta produce menos.",
+        "Corta con cuchillo dejando un trozo de tallo."
+      ],
+      "consejos": [
+        "Las primeras flores suelen ser masculinas (sin fruto en la base); es normal que caigan.",
+        "Las flores también se comen (rellenas o en tortilla).",
+        "Agrega compost bien descompuesto al hoyo de plantación."
+      ]
+    },
+    {
+      "id": "choclo",
+      "nombre": "Choclo",
+      "nombreCorto": "Choclo",
+      "nombreCientifico": "Zea mays",
+      "icono": "🌽",
+      "descripcion": "Necesita calor, sol y espacio. Se poliniza con el viento, por eso hay que sembrarlo en bloques (varias hileras cortas) y no en una sola hilera larga.",
+      "siembra": {
+        "metodos": ["directa"],
+        "metodoRecomendado": "directa",
+        "mesesDirecta": [10, 11, 12],
+        "mesesAlmacigo": [],
+        "mesesTrasplante": [],
+        "notas": "Siembra con el suelo tibio, en bloques de al menos 4 hileras. Siembra escalonada cada 2 o 3 semanas hasta diciembre para tener choclos para las humitas en verano."
+      },
+      "profundidadCm": [3, 5],
+      "distanciaCm": { "plantas": [25, 30], "hileras": [70, 80] },
+      "diasGerminacion": [7, 10],
+      "diasAlmacigo": null,
+      "diasFloracion": 65,
+      "diasCosecha": [85, 100],
+      "ventanaCosechaDias": 14,
+      "sol": { "nivel": "pleno", "texto": "Pleno sol todo el día. Es el más exigente en luz de esta guía." },
+      "riego": {
+        "texto": "Riego profundo. Los momentos críticos son la aparición de la panoja y las barbas, y el llenado del grano: ahí no puede faltar agua.",
+        "frecuencia": "Cada 3 días; más seguido en floración",
+        "diasAlerta": 4
+      },
+      "companeras": ["poroto-enredadera", "poroto-mata-baja", "zapallo-italiano", "Pepino", "Arveja"],
+      "incompatibles": ["tomate", "Apio"],
+      "plagas": [
+        { "nombre": "Pájaros", "senal": "Tordos y palomas desentierran las semillas o se comen las plántulas.", "manejo": "Cubre con malla o ramas hasta que las plantas tengan 10 cm." },
+        { "nombre": "Gusano del choclo", "senal": "Larvas dentro de la punta de la mazorca y barbas comidas.", "manejo": "Una gota de aceite vegetal en las barbas cuando empiezan a secarse; corta la punta dañada al cosechar." },
+        { "nombre": "Gusano cortador", "senal": "Plántulas cortadas a ras de suelo.", "manejo": "Revisa alrededor de las plantas en la mañana y retira las larvas." },
+        { "nombre": "Carbón del maíz", "senal": "Agallas grises y abultadas en mazorcas o tallos.", "manejo": "Corta y elimina las agallas antes de que se abran; rota el lugar de cultivo." }
+      ],
+      "senalesCosecha": [
+        "Unas 3 semanas después de que aparecen las barbas, estas se ponen cafés y secas.",
+        "La mazorca se siente llena hasta la punta al tocarla por fuera.",
+        "Al presionar un grano con la uña sale un líquido lechoso (si es transparente, falta; si es pastoso, se pasó).",
+        "Ventana corta: revisa cada 2 días cuando se acerque."
+      ],
+      "consejos": [
+        "Aporca (arrima tierra a la base) cuando tenga unos 30 cm para que resista el viento.",
+        "Es exigente en nutrientes: incorpora compost antes de sembrar.",
+        "Cocínalo apenas cosechado: el azúcar se convierte en almidón en pocas horas."
+      ]
+    },
+    {
+      "id": "cilantro",
+      "nombre": "Cilantro",
+      "nombreCorto": "Cilantro",
+      "nombreCientifico": "Coriandrum sativum",
+      "icono": "🌿",
+      "descripcion": "Hierba de clima fresco y ciclo corto. Con calor se espiga (florece) rápido, por eso rinde más en primavera y otoño.",
+      "siembra": {
+        "metodos": ["directa"],
+        "metodoRecomendado": "directa",
+        "mesesDirecta": [3, 4, 5, 8, 9, 10, 11],
+        "mesesAlmacigo": [],
+        "mesesTrasplante": [],
+        "notas": "No le gusta el trasplante: siembra directo. Siembra cada 3 semanas para tener siempre hojas frescas. En pleno verano siembra en semisombra."
+      },
+      "profundidadCm": [1, 1.5],
+      "distanciaCm": { "plantas": [5, 10], "hileras": [20, 25] },
+      "diasGerminacion": [7, 14],
+      "diasAlmacigo": null,
+      "diasFloracion": null,
+      "diasCosecha": [40, 55],
+      "ventanaCosechaDias": 25,
+      "sol": { "nivel": "medio", "texto": "Sol suave o media sombra. En verano, sombra por la tarde retrasa la subida a flor." },
+      "riego": {
+        "texto": "Mantén el suelo húmedo de forma constante. La sequedad acelera la floración y las hojas pierden sabor.",
+        "frecuencia": "Día por medio",
+        "diasAlerta": 2
+      },
+      "companeras": ["tomate", "lechuga", "poroto-mata-baja", "Espinaca", "Zanahoria"],
+      "incompatibles": ["Hinojo"],
+      "plagas": [
+        { "nombre": "Pulgón", "senal": "Colonias en tallos tiernos y brotes.", "manejo": "Chorro de agua o jabón potásico." },
+        { "nombre": "Babosas", "senal": "Plántulas desaparecidas tras una noche húmeda.", "manejo": "Recolección y barreras de ceniza." },
+        { "nombre": "Subida a flor", "senal": "La planta alarga un tallo central y las hojas se vuelven finas como plumas.", "manejo": "No es plaga: es calor o falta de agua. Cosecha seguido y vuelve a sembrar; deja algunas flores para atraer insectos benéficos." }
+      ],
+      "senalesCosecha": [
+        "Plantas de unos 15 cm con varias hojas anchas.",
+        "Corta las hojas externas y deja crecer el centro.",
+        "Cosecha antes de que aparezca el tallo floral.",
+        "Si florece, deja secar las semillas (coriandro) y guárdalas para condimento o para sembrar."
+      ],
+      "consejos": [
+        "Frota suavemente las semillas para partirlas en dos antes de sembrar: germinan más rápido.",
+        "Remojar la semilla una noche también ayuda.",
+        "Las flores atraen insectos que controlan pulgones."
+      ]
+    },
+    {
+      "id": "albahaca",
+      "nombre": "Albahaca",
+      "nombreCorto": "Albahaca",
+      "nombreCientifico": "Ocimum basilicum",
+      "icono": "🪴",
+      "descripcion": "Aromática de calor, muy sensible al frío (sufre bajo 10 °C). Excelente compañera del tomate y fácil de cultivar en macetero.",
+      "siembra": {
+        "metodos": ["almacigo", "directa"],
+        "metodoRecomendado": "almacigo",
+        "mesesDirecta": [11, 12],
+        "mesesAlmacigo": [9, 10, 11],
+        "mesesTrasplante": [11, 12],
+        "notas": "Almácigo protegido en septiembre y octubre; trasplanta en noviembre, cuando las noches ya son templadas. En macetero puedes entrarla en las noches frías."
+      },
+      "profundidadCm": [0.3, 0.5],
+      "distanciaCm": { "plantas": [25, 30], "hileras": [35, 40] },
+      "diasGerminacion": [5, 10],
+      "diasAlmacigo": [30, 45],
+      "diasFloracion": null,
+      "diasCosecha": [60, 75],
+      "ventanaCosechaDias": 90,
+      "sol": { "nivel": "pleno", "texto": "Pleno sol y lugar abrigado del viento." },
+      "riego": {
+        "texto": "Suelo húmedo pero con buen drenaje; el exceso de agua pudre las raíces. Riega en la mañana y al pie. En macetero se seca más rápido.",
+        "frecuencia": "Cada 2 días (en macetero, a diario en verano)",
+        "diasAlerta": 2
+      },
+      "companeras": ["tomate", "lechuga", "Pimentón", "Orégano", "Ají"],
+      "incompatibles": ["Ruda", "Salvia"],
+      "plagas": [
+        { "nombre": "Babosas y caracoles", "senal": "Hojas con agujeros grandes y rastros de baba.", "manejo": "Recolección nocturna y barreras de ceniza o cáscara de huevo." },
+        { "nombre": "Pulgón y mosquita blanca", "senal": "Insectos en el envés de las hojas, hojas pegajosas.", "manejo": "Jabón potásico y lavado con agua." },
+        { "nombre": "Pudrición del cuello", "senal": "Tallo oscuro y blando en la base; la planta se marchita aunque el suelo esté húmedo.", "manejo": "Reduce el riego y mejora el drenaje; en macetero usa sustrato suelto." },
+        { "nombre": "Daño por frío", "senal": "Hojas ennegrecidas tras una noche fría.", "manejo": "No trasplantes antes de noviembre; protégela o entra el macetero si viene frío." }
+      ],
+      "senalesCosecha": [
+        "Plantas de 15 a 20 cm con al menos 3 pares de hojas.",
+        "Corta las puntas justo sobre un par de hojas: la planta ramifica y produce más.",
+        "Corta las flores apenas aparezcan para mantener el sabor de las hojas.",
+        "Cosecha en la mañana, antes del calor fuerte."
+      ],
+      "consejos": [
+        "Despunta la planta cuando tenga 3 o 4 pares de hojas para que se ponga frondosa.",
+        "No la guardes en el refrigerador: se ennegrece. Ponla en un vaso con agua.",
+        "Antes del otoño, haz pesto o congela hojas con aceite."
+      ]
+    }
+  ]
+}
