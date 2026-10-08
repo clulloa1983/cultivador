@@ -10,7 +10,7 @@ Los datos se guardan en el navegador (`localStorage`) y se puede instalar como a
 
 ## Funcionalidades
 
-- **Guía de cultivos**: fichas de poroto verde (mata baja y enredadera), tomate, lechuga, zapallo italiano, choclo, cilantro y albahaca. Cada ficha trae:
+- **Guía de cultivos**: 12 fichas: poroto verde (mata baja y enredadera), tomate, lechuga, zapallo italiano, choclo, cilantro, albahaca, perejil, apio, cebolla de guarda y ajo. Cada ficha trae:
   - calendario de siembra directa, almácigo y trasplante;
   - profundidad y distancia de siembra;
   - días a germinación, floración y cosecha;
@@ -21,7 +21,11 @@ Los datos se guardan en el navegador (`localStorage`) y se puede instalar como a
 
   Destaca lo que se puede sembrar **en el mes actual**.
 - **Mis cultivos**:
-  - Registra especie, fecha de siembra, método (siembra directa o almácigo, con fecha de trasplante opcional), ubicación (macetero, bancal o suelo) y notas.
+  - Registra especie, fecha de siembra, método, ubicación (macetero, bancal o suelo) y notas. Los métodos son tres:
+    - siembra directa;
+    - almácigo, con fecha de trasplante opcional;
+    - plantín comprado: solo pide la fecha de trasplante y la app estima la de siembra según los días típicos de almácigo de la especie.
+  - El formulario solo ofrece los métodos que sirven para cada especie. Por ejemplo, el ajo dice «Plantación de dientes».
   - Muestra la etapa estimada (germinación, almácigo, crecimiento, floración, cosecha) con barra de progreso.
   - Permite editar, archivar (con «Deshacer») y eliminar, con confirmación.
 - **Bitácora**:
@@ -158,9 +162,12 @@ Agrega un objeto al arreglo `especies` de `data/cultivos.json`. Copia una ficha 
 | `diasFloracion` | Días hasta la floración, o `null` si se cosecha la hoja (lechuga, cilantro). |
 | `ventanaCosechaDias` | Cuántos días dura la temporada de cosecha. |
 | `riego.diasAlerta` | Días sin riego a partir de los cuales el inicio avisa. |
+| `etiquetas` | (Opcional) Nombres propios de etapas. Por ejemplo, el ajo usa `germinacion: { nombre: "Brotación", corto: "Brota", verbo: "brotar" }`, y el ajo y la cebolla usan `floracion: { nombre: "Formación de bulbo", corto: "Bulbo", texto: "…" }`. |
+| `metodoTexto` | (Opcional) Otro nombre para un método. Por ejemplo, el ajo usa `{ "directa": "Plantación de dientes" }`. |
+| `aviso` | (Opcional) Advertencia que se muestra en la ficha, por ejemplo cuando el calendario es aproximado. |
 | `companeras`, `incompatibles` | Nombres libres. Si usas el `id` de otra especie, se convierte en enlace a su ficha. |
 
-Después sube el número de `VERSION` en `sw.js`.
+Para el ícono, agrega un `<symbol id="g-ID">` de 32×32 en `index.html`; si no existe, se usa el emoji del campo `icono`. Después sube el número de `VERSION` en `sw.js`.
 
 ## Accesibilidad
 

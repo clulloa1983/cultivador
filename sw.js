@@ -2,7 +2,7 @@
    Estrategia "stale-while-revalidate": responde al tiro desde la caché y
    actualiza en segundo plano, así la próxima visita ya trae la versión nueva.
    Si cambias la lista de archivos, sube el número de VERSION. */
-const VERSION = 'cultivador-v5';
+const VERSION = 'cultivador-v6';
 const ARCHIVOS = [
   './',
   './index.html',

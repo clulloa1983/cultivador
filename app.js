@@ -17,7 +17,7 @@ const TIPOS = {
   cosecha: { nombre: 'Cosecha', svg: 'cosecha' },
 };
 const UBICACIONES = { macetero: 'Macetero', bancal: 'Bancal', suelo: 'Suelo' };
-const METODOS = { directa: 'Siembra directa', almacigo: 'Almácigo' };
+const METODOS = { directa: 'Siembra directa', almacigo: 'Almácigo', plantin: 'Plantín comprado' };
 const UNIDADES = { g: 'g', kg: 'kg', unidades: 'unidades', atados: 'atados' };
 const TEMAS = ['auto', 'claro', 'oscuro'];
 const ESPECIE_DESCONOCIDA = {
@@ -200,14 +200,15 @@ function normalizar(obj) {
       continue;
     }
     idsCultivos.add(c.id);
-    const metodo = c.metodo === 'almacigo' ? 'almacigo' : 'directa';
+    let metodo = c.metodo === 'almacigo' || c.metodo === 'plantin' ? c.metodo : 'directa';
+    if (metodo === 'plantin' && !esFechaISO(c.fechaTrasplante)) metodo = 'almacigo';
     cultivos.push({
       id: c.id,
       especieId: c.especieId,
       apodo: texto(c.apodo, 40),
       fechaSiembra: c.fechaSiembra,
       metodo,
-      fechaTrasplante: metodo === 'almacigo' && esFechaISO(c.fechaTrasplante) ? c.fechaTrasplante : null,
+      fechaTrasplante: metodo !== 'directa' && esFechaISO(c.fechaTrasplante) ? c.fechaTrasplante : null,
       ubicacion: typeof c.ubicacion === 'string' && tiene(UBICACIONES, c.ubicacion) ? c.ubicacion : 'bancal',
       notas: texto(c.notas, 1000),
       archivado: c.archivado === true,
@@ -256,6 +257,24 @@ function nombreCultivo(c) {
   const e = especieDe(c);
   return c.apodo ? `${e.nombreCorto} · ${c.apodo}` : e.nombreCorto;
 }
+/** Texto del método según la especie (el ajo no se «siembra»: se plantan dientes). */
+function textoMetodo(metodo, e) {
+  return e.metodoTexto?.[metodo] || METODOS[metodo];
+}
+/** «Siembra directa» o «Plantación» (ajo), para calendarios e insignias. */
+function nombreDirecta(e) {
+  return e.metodoTexto?.directa ? 'Plantación' : 'Siembra directa';
+}
+/** Nombre de una etapa con las etiquetas propias de la especie (p. ej. «Brota», «Bulbo»). */
+function etiquetaEtapa(e, id, nombre, corto) {
+  const x = e.etiquetas?.[id];
+  return [x?.nombre || nombre, x?.corto || corto];
+}
+/** Días que un plantín pasa en almácigo (punto medio del rango de la especie). */
+function diasAlmacigoEstimados(e) {
+  const [min, max] = e.diasAlmacigo || [20, 30];
+  return Math.round((min + max) / 2);
+}
 function cultivosActivos() { return estado.cultivos.filter((c) => !c.archivado); }
 function ultimoRiego(cultivoId) {
   let max = null;
@@ -288,15 +307,17 @@ function esDelMes(e, mes) {
 function calcularEtapas(c, e = especieDe(c), hoy = hoyISO()) {
   const dia = diasEntre(c.fechaSiembra, hoy);
   const germ = e.diasGerminacion[1];
-  const almacigo = c.metodo === 'almacigo';
+  // Un plantín comprado se trata como almácigo ya trasplantado; la fecha de siembra se estimó al guardarlo.
+  const almacigo = c.metodo === 'almacigo' || c.metodo === 'plantin';
+  const inicioConteo = c.metodo === 'plantin' && c.fechaTrasplante ? diasEntre(c.fechaSiembra, c.fechaTrasplante) : 0;
   let desfase = 0;
   let finAlmacigo = null;
   let trasplanteEstimado = null;
   let listoTrasplantar = false;
 
   if (almacigo) {
-    const [amin, amax] = e.diasAlmacigo || [20, 30];
-    const est = Math.round((amin + amax) / 2);
+    const [amin] = e.diasAlmacigo || [20, 30];
+    const est = diasAlmacigoEstimados(e);
     trasplanteEstimado = sumarDias(c.fechaSiembra, est);
     if (c.fechaTrasplante) {
       const real = Math.max(germ + 1, diasEntre(c.fechaSiembra, c.fechaTrasplante));
@@ -317,11 +338,11 @@ function calcularEtapas(c, e = especieDe(c), hoy = hoyISO()) {
     inicio = f;
   };
   const inicioCosecha = e.diasCosecha[0] + desfase;
-  agregar('germinacion', 'Germinación', 'Germina', germ);
+  agregar('germinacion', ...etiquetaEtapa(e, 'germinacion', 'Germinación', 'Germina'), germ);
   if (almacigo) agregar('almacigo', 'Almácigo', 'Almácigo', finAlmacigo);
   if (e.diasFloracion) {
     agregar('crecimiento', 'Crecimiento', 'Crece', e.diasFloracion + desfase);
-    agregar('floracion', 'Floración', 'Florece', inicioCosecha);
+    agregar('floracion', ...etiquetaEtapa(e, 'floracion', 'Floración', 'Florece'), inicioCosecha);
   } else {
     agregar('crecimiento', 'Crecimiento', 'Crece', inicioCosecha);
   }
@@ -332,11 +353,12 @@ function calcularEtapas(c, e = especieDe(c), hoy = hoyISO()) {
 
   let estadoCiclo = 'activo';
   let actual = etapas.findIndex((x) => dia >= x.inicio && dia < x.fin);
-  if (dia < 0) { estadoCiclo = 'programado'; actual = -1; }
+  if (dia < 0 || dia < inicioConteo) { estadoCiclo = 'programado'; actual = -1; }
   else if (dia >= total) { estadoCiclo = 'terminado'; actual = etapas.length; }
 
   return {
-    dia, total, etapas, actual, estado: estadoCiclo,
+    dia, total, etapas, actual, estado: estadoCiclo, inicioConteo,
+    plantin: c.metodo === 'plantin',
     etapa: etapas[actual] || null,
     progreso: Math.min(Math.max(dia, 0), total),
     listoTrasplantar: listoTrasplantar && etapas[actual]?.id === 'almacigo',
@@ -348,30 +370,33 @@ function calcularEtapas(c, e = especieDe(c), hoy = hoyISO()) {
   };
 }
 
-function nombreEtapa(info) {
-  if (info.estado === 'programado') return 'Por sembrar';
+function nombreEtapa(info, e) {
+  if (info.estado === 'programado') return info.plantin ? 'Por trasplantar' : e.metodoTexto?.directa ? 'Por plantar' : 'Por sembrar';
   if (info.estado === 'terminado') return 'Ciclo terminado';
   if (info.listoTrasplantar) return 'Lista para trasplantar';
   return info.etapa.nombre;
 }
 
 function descripcionEtapa(c, e, info) {
-  if (info.estado === 'programado') return `Siembra programada para el ${fmtFecha(c.fechaSiembra)}.`;
+  if (info.estado === 'programado') {
+    if (info.plantin) return `Trasplante programado para el ${fmtFecha(c.fechaTrasplante)}.`;
+    return `${e.metodoTexto?.directa ? 'Plantación programada' : 'Siembra programada'} para el ${fmtFecha(c.fechaSiembra)}.`;
+  }
   if (info.estado === 'terminado') return `El ciclo estimado terminó el ${fmtFecha(info.fechaCosechaFin)}. Si ya no produce, puedes archivarlo.`;
   const desdeCosecha = `Cosecha estimada desde el ${fmtFecha(info.fechaCosechaInicio)}.`;
   switch (info.etapa.id) {
     case 'germinacion':
-      return `Mantén la tierra húmeda. Debería germinar entre los días ${e.diasGerminacion[0]} y ${e.diasGerminacion[1]}.`;
+      return `Mantén la tierra húmeda. Debería ${e.etiquetas?.germinacion?.verbo || 'germinar'} entre los días ${e.diasGerminacion[0]} y ${e.diasGerminacion[1]}.`;
     case 'almacigo':
       return info.listoTrasplantar
         ? '¡Ya puedes trasplantar! Hazlo en una tarde nublada y luego anota la fecha con «Editar».'
         : `Plantines en almácigo. Trasplante estimado cerca del ${fmtFecha(info.trasplanteEstimado)}.`;
     case 'crecimiento':
       return info.fechaFloracion
-        ? `La planta desarrolla hojas y raíces. Floración estimada cerca del ${fmtFecha(info.fechaFloracion)}.`
+        ? `La planta desarrolla hojas y raíces. ${etiquetaEtapa(e, 'floracion', 'Floración')[0]} estimada cerca del ${fmtFecha(info.fechaFloracion)}.`
         : `La planta desarrolla hojas y raíces. ${desdeCosecha}`;
     case 'floracion':
-      return `¡Aparecen las flores! No dejes que le falte agua. ${desdeCosecha}`;
+      return `${e.etiquetas?.floracion?.texto || '¡Aparecen las flores! No dejes que le falte agua.'} ${desdeCosecha}`;
     case 'cosecha':
       return `¡Época de cosecha hasta cerca del ${fmtFecha(info.fechaCosechaFin)}! Revisa las <a href="#/guia/${esc(e.id)}">señales de cosecha</a>.`;
     default:
@@ -461,7 +486,7 @@ function vistaNoEncontrada() {
 function insigniasMes(e, mes) {
   const t = temporadaEnMes(e, mes);
   const out = [];
-  if (t.directa) out.push('<span class="insignia verde"><i class="celda d" aria-hidden="true"></i>Siembra directa este mes</span>');
+  if (t.directa) out.push(`<span class="insignia verde"><i class="celda d" aria-hidden="true"></i>${nombreDirecta(e)} este mes</span>`);
   if (t.almacigo) out.push('<span class="insignia tierra"><i class="celda a" aria-hidden="true"></i>Almácigo este mes</span>');
   if (t.trasplante) out.push('<span class="insignia verde"><i class="celda t" aria-hidden="true"></i>Trasplante este mes</span>');
   if (!out.length) out.push('<span class="insignia">Fuera de temporada</span>');
@@ -470,7 +495,8 @@ function insigniasMes(e, mes) {
 
 function insigniaMesCompacta(e, mes) {
   const t = temporadaEnMes(e, mes);
-  const que = [t.directa && (t.almacigo || t.trasplante ? 'directa' : 'siembra directa'), t.almacigo && 'almácigo', t.trasplante && 'trasplante'].filter(Boolean);
+  const directa = e.metodoTexto?.directa ? 'plantación' : t.almacigo || t.trasplante ? 'directa' : 'siembra directa';
+  const que = [t.directa && directa, t.almacigo && 'almácigo', t.trasplante && 'trasplante'].filter(Boolean);
   return que.length
     ? `<div class="insignias"><span class="insignia verde">Este mes: ${listaTexto(que)}</span></div>`
     : '<div class="insignias"><span class="insignia">Fuera de temporada</span></div>';
@@ -481,7 +507,7 @@ function resumenSiembra(e) {
   if (s.metodoRecomendado === 'almacigo' && s.mesesAlmacigo.length) {
     return `Almácigo: ${textoMeses(s.mesesAlmacigo)}. Trasplante: ${textoMeses(s.mesesTrasplante)}.`;
   }
-  return `Siembra: ${textoMeses(s.mesesDirecta)}.`;
+  return `${e.metodoTexto?.directa ? 'Plantación' : 'Siembra'}: ${textoMeses(s.mesesDirecta)}.`;
 }
 
 /** Cuadrícula de especies que se pueden sembrar, almacigar o trasplantar este mes. */
@@ -490,7 +516,7 @@ function tarjetasDelMes(mes) {
   if (!items.length) return '';
   return `<ul class="grilla-mes">${items.map((e) => {
     const t = temporadaEnMes(e, mes);
-    const que = [t.directa && 'siembra directa', t.almacigo && 'almácigo', t.trasplante && 'trasplante'].filter(Boolean);
+    const que = [t.directa && nombreDirecta(e).toLowerCase(), t.almacigo && 'almácigo', t.trasplante && 'trasplante'].filter(Boolean);
     return `<li><a class="tarjeta-mes" href="#/guia/${esc(e.id)}">${glifo(e)}`
       + `<span><strong>${esc(e.nombreCorto)}</strong><small>${capitalizar(listaTexto(que))}</small></span></a></li>`;
   }).join('')}</ul>`;
@@ -549,7 +575,7 @@ function vistaFicha(id) {
   const mes = new Date().getMonth() + 1;
   const s = e.siembra;
   const filas = [
-    ['d', 'Siembra directa', s.mesesDirecta],
+    ['d', nombreDirecta(e), s.mesesDirecta],
     ['a', 'Almácigo', s.mesesAlmacigo],
     ['t', 'Trasplante', s.mesesTrasplante],
   ].filter(([, , meses]) => meses.length);
@@ -572,16 +598,17 @@ function vistaFicha(id) {
     <ul class="cal-texto">
       ${filas.map(([, nombre, meses]) => `<li><strong>${nombre}:</strong> ${textoMeses(meses)}.</li>`).join('')}
     </ul>
-    <p class="texto-suave">${esc(s.notas)}</p>`;
+    <p class="texto-suave">${esc(s.notas)}</p>
+    ${e.aviso ? `<div class="aviso neutro">${icono('alerta')}<p>${esc(e.aviso)}</p></div>` : ''}`;
 
   const datos = [
     ['Profundidad', rango(e.profundidadCm, 'cm')],
     ['Entre plantas', rango(e.distanciaCm.plantas, 'cm')],
     ['Entre hileras', rango(e.distanciaCm.hileras, 'cm')],
-    ['Germinación', rango(e.diasGerminacion, 'días')],
+    [etiquetaEtapa(e, 'germinacion', 'Germinación')[0], rango(e.diasGerminacion, 'días')],
   ];
   if (e.diasAlmacigo) datos.push(['En almácigo', rango(e.diasAlmacigo, 'días')]);
-  if (e.diasFloracion) datos.push(['Floración', `~${e.diasFloracion} días`]);
+  if (e.diasFloracion) datos.push([etiquetaEtapa(e, 'floracion', 'Floración')[0], `~${e.diasFloracion} días`]);
   datos.push(['Cosecha desde', rango(e.diasCosecha, 'días')]);
   datos.push(['Temporada de cosecha', `~${plural(Math.round(e.ventanaCosechaDias / 7), 'semana', 'semanas')}`]);
 
@@ -676,8 +703,11 @@ function tarjetaCultivo(c) {
   const id = esc(c.id);
   const ultimo = ultimoRiego(c.id);
   const nEntradas = estado.bitacora.filter((x) => x.cultivoId === c.id).length;
-  const etapaTxt = nombreEtapa(info);
-  const diaTxt = info.estado === 'programado' ? `Faltan ${plural(-info.dia, 'día', 'días')}` : `Día ${info.dia}`;
+  const etapaTxt = nombreEtapa(info, e);
+  // Con plantín comprado, los días se cuentan desde el trasplante.
+  const diaTxt = info.estado === 'programado'
+    ? `Faltan ${plural(info.inicioConteo - info.dia, 'día', 'días')}`
+    : `Día ${info.dia - info.inicioConteo}`;
 
   // Barra por etapas: cada tramo se llena según el avance. Las etiquetas van debajo,
   // en una línea que puede partirse (✓ hecha, ● actual), así el estado no depende solo del color.
@@ -695,7 +725,10 @@ function tarjetaCultivo(c) {
   }).join('');
 
   const programado = info.estado === 'programado';
-  const datos = [`<li>${icono('calendario')}${programado ? 'Siembra' : 'Sembrado'} ${fmtFechaCorta(c.fechaSiembra)}</li>`];
+  const [verboFuturo, verboPasado] = e.metodoTexto?.directa && c.metodo === 'directa' ? ['Plantación', 'Plantado'] : ['Siembra', 'Sembrado'];
+  const datos = info.plantin
+    ? [`<li>${icono('cultivos')}${programado ? 'Trasplante' : 'Trasplantado'} ${fmtFechaCorta(c.fechaTrasplante)}</li>`]
+    : [`<li>${icono('calendario')}${programado ? verboFuturo : verboPasado} ${fmtFechaCorta(c.fechaSiembra)}</li>`];
   if (c.metodo === 'almacigo' && !programado) {
     datos.push(c.fechaTrasplante
       ? `<li>${icono('cultivos')}Trasplantado ${fmtFechaCorta(c.fechaTrasplante)}</li>`
@@ -713,13 +746,13 @@ function tarjetaCultivo(c) {
           ${glifo(e, 'medio')}
           <div>
             <h2 id="t-${id}">${esc(nombre)}</h2>
-            <p class="sub">${UBICACIONES[c.ubicacion]} · ${METODOS[c.metodo]}</p>
+            <p class="sub">${UBICACIONES[c.ubicacion]} · ${textoMetodo(c.metodo, e)}</p>
           </div>
         </div>
         <div class="cultivo-info">
           <div class="etapa-actual">
             <p><span class="rotulo">Etapa</span><strong class="valor">${etapaTxt}</strong></p>
-            <p class="dia-ciclo"><strong class="valor">${diaTxt}</strong>${info.estado === 'programado' ? '' : `<span class="rotulo">de ~${info.total}</span>`}</p>
+            <p class="dia-ciclo"><strong class="valor">${diaTxt}</strong>${info.estado === 'programado' ? '' : `<span class="rotulo">de ~${info.total - info.inicioConteo}</span>`}</p>
           </div>
           <div class="pista" aria-hidden="true">${tramos}</div>
           <ol class="etapas" aria-label="Etapas">${etapas}</ol>
@@ -894,7 +927,7 @@ function vistaBitacora(r) {
         </select>
       </div>
     </div>
-    ${cultivoFiltrado && !cultivoFiltrado.archivado && cultivoFiltrado.fechaSiembra <= hoy ? `<div class="acciones" style="margin-bottom:8px">${botonRiego(cultivoFiltrado)}</div>` : ''}
+    ${cultivoFiltrado && !cultivoFiltrado.archivado && calcularEtapas(cultivoFiltrado).estado !== 'programado' ? `<div class="acciones" style="margin-bottom:8px">${botonRiego(cultivoFiltrado)}</div>` : ''}
     ${lista}
     <div style="height:72px" aria-hidden="true"></div>
     ${activos.length ? `<button type="button" class="boton primario fab" data-accion="nueva-entrada" data-cultivo="${cultivoFiltrado && !cultivoFiltrado.archivado ? esc(fCultivo) : ''}" data-tipo="${esc(fTipo)}" data-key="fab-entrada">${icono('mas')}Nueva entrada</button>` : ''}`;
@@ -1195,12 +1228,22 @@ const formCultivo = $('#form-cultivo');
 function actualizarAyudaMetodo(cambiarMetodo) {
   const e = especiesPorId.get(campo(formCultivo, 'especieId').value);
   const ayuda = $('#c-metodo-ayuda');
+  const metodo = campo(formCultivo, 'metodo');
+  // Solo se muestran los métodos que tienen sentido para la especie (+ plantín si se hace almácigo).
+  const permitidos = e
+    ? [...e.siembra.metodos, ...(e.siembra.metodos.includes('almacigo') ? ['plantin'] : [])]
+    : Object.keys(METODOS);
+  for (const l of $$('[data-metodo]', formCultivo)) {
+    l.hidden = !permitidos.includes(l.dataset.metodo) && !(l.dataset.metodo === metodo.value && !cambiarMetodo);
+  }
+  $('#c-metodo-directa').textContent = e ? textoMetodo('directa', e) : METODOS.directa;
   if (e) {
     const rec = e.siembra.metodoRecomendado;
-    ayuda.textContent = e.siembra.metodos.length > 1
-      ? `Para ${e.nombreCorto.toLowerCase()} se recomienda: ${METODOS[rec].toLowerCase()}.`
-      : `${e.nombreCorto} se siembra directo; no le gusta el trasplante.`;
-    if (cambiarMetodo) campo(formCultivo, 'metodo').value = rec;
+    if (e.metodoTexto?.directa) ayuda.textContent = `${e.nombreCorto} se planta por dientes, directo en su lugar definitivo.`;
+    else if (e.siembra.metodos.length === 1 && rec === 'directa') ayuda.textContent = `${e.nombreCorto} se siembra directo; no le gusta el trasplante.`;
+    else ayuda.textContent = `Para ${e.nombreCorto.toLowerCase()} se recomienda: ${textoMetodo(rec, e).toLowerCase()}. Si compraste plantines, elige «Plantín comprado».`;
+    const actualOculto = $(`[data-metodo="${metodo.value}"]`, formCultivo)?.hidden;
+    if (cambiarMetodo || actualOculto) metodo.value = rec;
   } else {
     ayuda.textContent = '';
   }
@@ -1208,10 +1251,24 @@ function actualizarAyudaMetodo(cambiarMetodo) {
 }
 
 function actualizarCampoTrasplante() {
-  const almacigo = campo(formCultivo, 'metodo').value === 'almacigo';
-  $('#campo-trasplante').hidden = !almacigo;
+  const e = especiesPorId.get(campo(formCultivo, 'especieId').value);
+  const metodo = campo(formCultivo, 'metodo').value;
+  const plantin = metodo === 'plantin';
+  const trasplante = campo(formCultivo, 'fechaTrasplante');
+  $('#campo-trasplante').hidden = metodo === 'directa';
+  $('#campo-siembra').hidden = plantin;
+  $('#c-fecha-texto').textContent = e?.metodoTexto?.directa ? 'Fecha de plantación' : 'Fecha de siembra';
+  // Con plantín comprado la fecha de trasplante es obligatoria (es el punto de partida).
+  $('#c-trasplante-label').innerHTML = plantin
+    ? 'Fecha de trasplante <span class="req" aria-hidden="true">*</span>'
+    : 'Fecha de trasplante <span class="opcional">(opcional)</span>';
+  $('#c-trasplante-ayuda').textContent = plantin
+    ? 'El día en que pusiste el plantín en su lugar definitivo.'
+    : 'Complétala cuando pases las plantas a su lugar definitivo.';
+  trasplante.required = plantin;
+  if (plantin && !trasplante.value) trasplante.value = hoyISO();
   const siembra = campo(formCultivo, 'fechaSiembra').value;
-  campo(formCultivo, 'fechaTrasplante').min = siembra || '';
+  trasplante.min = plantin ? '' : siembra || '';
 }
 
 function abrirFormCultivo(c = null, especieId = null) {
@@ -1249,14 +1306,19 @@ formCultivo.addEventListener('submit', (ev) => {
   const v = (n) => campo(formCultivo, n).value.trim();
   const id = v('id');
   const especieId = v('especieId');
-  const fechaSiembra = v('fechaSiembra');
-  const metodo = v('metodo') === 'almacigo' ? 'almacigo' : 'directa';
-  const fechaTrasplante = metodo === 'almacigo' ? v('fechaTrasplante') : '';
+  let fechaSiembra = v('fechaSiembra');
+  const metodo = tiene(METODOS, v('metodo')) ? v('metodo') : 'directa';
+  const fechaTrasplante = metodo === 'directa' ? '' : v('fechaTrasplante');
   const errores = [];
   if (!especieId) errores.push(['especieId', 'Elige qué especie sembraste.']);
-  if (!esFechaISO(fechaSiembra)) errores.push(['fechaSiembra', 'Ingresa una fecha de siembra válida.']);
+  if (metodo === 'plantin') {
+    // Se estima la fecha de siembra restando los días típicos de almácigo de la especie.
+    if (!esFechaISO(fechaTrasplante)) errores.push(['fechaTrasplante', 'Ingresa la fecha en que trasplantaste el plantín.']);
+    else if (fechaTrasplante > sumarDias(hoy, 365)) errores.push(['fechaTrasplante', 'La fecha no puede ser más de un año en el futuro.']);
+    else fechaSiembra = sumarDias(fechaTrasplante, -diasAlmacigoEstimados(especiesPorId.get(especieId) || ESPECIE_DESCONOCIDA));
+  } else if (!esFechaISO(fechaSiembra)) errores.push(['fechaSiembra', 'Ingresa una fecha válida.']);
   else if (fechaSiembra > sumarDias(hoy, 365)) errores.push(['fechaSiembra', 'La fecha no puede ser más de un año en el futuro.']);
-  if (fechaTrasplante) {
+  if (fechaTrasplante && metodo === 'almacigo') {
     if (!esFechaISO(fechaTrasplante)) errores.push(['fechaTrasplante', 'Ingresa una fecha de trasplante válida.']);
     else if (esFechaISO(fechaSiembra) && fechaTrasplante < fechaSiembra) errores.push(['fechaTrasplante', 'El trasplante no puede ser antes de la siembra.']);
   }
@@ -1590,7 +1652,7 @@ function aplicarTema() {
 const ACCIONES = {
   regar: (d) => registrarRiego([d.id], `riego-${d.id}`),
   'regar-todos': () => registrarRiego(
-    cultivosActivos().filter((c) => diasEntre(c.fechaSiembra, hoyISO()) >= 0).map((c) => c.id),
+    cultivosActivos().filter((c) => calcularEtapas(c).estado !== 'programado').map((c) => c.id),
     'regar-todos',
   ),
   'nuevo-cultivo': (d) => abrirFormCultivo(null, d.especie || null),

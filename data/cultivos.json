@@ -31,7 +31,7 @@
         "diasAlerta": 3
       },
       "companeras": ["choclo", "zapallo-italiano", "lechuga", "Zanahoria", "Pepino", "Frutilla", "Papa"],
-      "incompatibles": ["Cebolla", "Ajo", "Puerro", "Ciboulette", "Hinojo"],
+      "incompatibles": ["cebolla", "ajo", "Puerro", "Ciboulette", "Hinojo"],
       "plagas": [
         { "nombre": "Mosca de la semilla", "senal": "Las semillas no germinan o salen plántulas sin hojas, con galerías en el tallo.", "manejo": "No siembres en suelo frío ni con guano fresco. Espera a que el suelo se entibie y vuelve a sembrar los espacios vacíos." },
         { "nombre": "Babosas y caracoles", "senal": "Plántulas recién nacidas comidas durante la noche, con rastros brillantes de baba.", "manejo": "Recógelos al atardecer, usa trampas con cerveza o barreras de ceniza o cáscara de huevo molida alrededor." },
@@ -80,7 +80,7 @@
         "diasAlerta": 3
       },
       "companeras": ["choclo", "zapallo-italiano", "lechuga", "Zanahoria", "Pepino", "Rabanito"],
-      "incompatibles": ["Cebolla", "Ajo", "Puerro", "Remolacha", "Hinojo"],
+      "incompatibles": ["cebolla", "ajo", "Puerro", "Remolacha", "Hinojo"],
       "plagas": [
         { "nombre": "Mosca de la semilla", "senal": "Semillas que no nacen o plántulas deformes con el tallo perforado.", "manejo": "Siembra con el suelo tibio y sin guano fresco; resiembra los espacios vacíos." },
         { "nombre": "Babosas y caracoles", "senal": "Hojas y brotes tiernos comidos de noche.", "manejo": "Recolección al atardecer, trampas con cerveza y barreras de ceniza." },
@@ -126,7 +126,7 @@
         "frecuencia": "Cada 2 a 3 días en verano",
         "diasAlerta": 3
       },
-      "companeras": ["albahaca", "lechuga", "cilantro", "Zanahoria", "Cebolla", "Ajo", "Perejil", "Caléndula"],
+      "companeras": ["albahaca", "lechuga", "cilantro", "Zanahoria", "cebolla", "ajo", "perejil", "Caléndula"],
       "incompatibles": ["Papa", "Hinojo", "Repollo", "choclo"],
       "plagas": [
         { "nombre": "Tizón tardío", "senal": "Manchas cafés y aceitosas en hojas y tallos que avanzan rápido con humedad y neblina costera.", "manejo": "Riega al pie, deja espacio entre plantas, retira hojas bajas y elimina (no compostes) las plantas enfermas. Muy común en la costa." },
@@ -175,8 +175,8 @@
         "frecuencia": "Diario o día por medio en verano",
         "diasAlerta": 2
       },
-      "companeras": ["Rabanito", "Zanahoria", "Frutilla", "Pepino", "Cebolla", "poroto-mata-baja", "tomate"],
-      "incompatibles": ["Perejil", "Apio"],
+      "companeras": ["Rabanito", "Zanahoria", "Frutilla", "Pepino", "cebolla", "poroto-mata-baja", "tomate"],
+      "incompatibles": ["perejil", "apio"],
       "plagas": [
         { "nombre": "Babosas y caracoles", "senal": "Hojas con agujeros irregulares y rastros de baba, sobre todo tras lluvia o riego.", "manejo": "Recolección nocturna, trampas con cerveza y barreras secas (ceniza, aserrín)." },
         { "nombre": "Pulgón", "senal": "Insectos verdes o grises en el cogollo y hojas deformadas.", "manejo": "Lava con agua; jabón potásico si la colonia crece." },
@@ -272,7 +272,7 @@
         "diasAlerta": 4
       },
       "companeras": ["poroto-enredadera", "poroto-mata-baja", "zapallo-italiano", "Pepino", "Arveja"],
-      "incompatibles": ["tomate", "Apio"],
+      "incompatibles": ["tomate", "apio"],
       "plagas": [
         { "nombre": "Pájaros", "senal": "Tordos y palomas desentierran las semillas o se comen las plántulas.", "manejo": "Cubre con malla o ramas hasta que las plantas tengan 10 cm." },
         { "nombre": "Gusano del choclo", "senal": "Larvas dentro de la punta de la mazorca y barbas comidas.", "manejo": "Una gota de aceite vegetal en las barbas cuando empiezan a secarse; corta la punta dañada al cosechar." },
@@ -384,6 +384,210 @@
         "Despunta la planta cuando tenga 3 o 4 pares de hojas para que se ponga frondosa.",
         "No la guardes en el refrigerador: se ennegrece. Ponla en un vaso con agua.",
         "Antes del otoño, haz pesto o congela hojas con aceite."
+      ]
+    },
+    {
+      "id": "perejil",
+      "nombre": "Perejil",
+      "nombreCorto": "Perejil",
+      "nombreCientifico": "Petroselinum crispum",
+      "icono": "🌿",
+      "descripcion": "Aromática bianual muy agradecida: una vez establecida da hojas durante meses. Su punto débil es la germinación, que puede tardar hasta cuatro semanas.",
+      "siembra": {
+        "metodos": ["directa", "almacigo"],
+        "metodoRecomendado": "directa",
+        "mesesDirecta": [8, 9, 10, 11, 2, 3, 4],
+        "mesesAlmacigo": [7, 8, 9, 2, 3],
+        "mesesTrasplante": [9, 10, 11, 3, 4, 5],
+        "notas": "Remoja la semilla 24 horas antes de sembrar y mantén la tierra siempre húmeda hasta que nazca: si se seca en esas semanas, no germina. En pleno verano siembra en semisombra."
+      },
+      "profundidadCm": [0.5, 1],
+      "distanciaCm": { "plantas": [15, 20], "hileras": [25, 30] },
+      "diasGerminacion": [14, 28],
+      "diasAlmacigo": [40, 50],
+      "diasFloracion": null,
+      "diasCosecha": [70, 90],
+      "ventanaCosechaDias": 180,
+      "sol": { "nivel": "medio", "texto": "Sol o media sombra. En verano agradece sombra por la tarde." },
+      "riego": {
+        "texto": "Suelo húmedo de forma constante, sin encharcar. La falta de agua endurece las hojas y adelanta la floración.",
+        "frecuencia": "Cada 2 días en verano",
+        "diasAlerta": 3
+      },
+      "companeras": ["tomate", "cebolla", "ajo", "Espárrago"],
+      "incompatibles": ["lechuga"],
+      "plagas": [
+        { "nombre": "Pulgón", "senal": "Colonias en tallos tiernos y hojas nuevas enrolladas.", "manejo": "Chorro de agua o jabón potásico; favorece a las chinitas." },
+        { "nombre": "Babosas y caracoles", "senal": "Plántulas recién nacidas que desaparecen de una noche a otra.", "manejo": "Recolección al atardecer y barreras de ceniza o cáscara de huevo molida." },
+        { "nombre": "Pudrición de raíz", "senal": "Plantas que amarillean y se marchitan aunque el suelo esté mojado.", "manejo": "Riega menos y mejora el drenaje; en macetero usa sustrato suelto." },
+        { "nombre": "Subida a flor", "senal": "En el segundo año la planta alarga un tallo floral y las hojas se ponen duras y amargas.", "manejo": "Es parte de su ciclo bianual: vuelve a sembrar. Deja algunas flores, que atraen insectos benéficos." }
+      ],
+      "senalesCosecha": [
+        "Plantas con al menos 8 a 10 hojas bien formadas.",
+        "Corta los tallos externos desde la base y deja el centro para que siga brotando.",
+        "No cortes más de un tercio de la planta a la vez.",
+        "Cuando florece (segundo año), es momento de renovarlo."
+      ],
+      "consejos": [
+        "Siémbralo cerca de la cocina: se usa casi todos los días.",
+        "Hay perejil liso y crespo; el liso tiene más sabor, el crespo se distingue mejor de la cicuta silvestre.",
+        "Congela hojas picadas en cubeteras con un poco de agua o aceite."
+      ]
+    },
+    {
+      "id": "apio",
+      "nombre": "Apio",
+      "nombreCorto": "Apio",
+      "nombreCientifico": "Apium graveolens var. dulce",
+      "icono": "🥬",
+      "descripcion": "Cultivo largo y exigente en agua. Se parte en almácigo porque la semilla es diminuta y lenta; en el huerto se cosecha de a pencas durante semanas.",
+      "siembra": {
+        "metodos": ["almacigo"],
+        "metodoRecomendado": "almacigo",
+        "mesesDirecta": [],
+        "mesesAlmacigo": [8, 9, 10],
+        "mesesTrasplante": [10, 11, 12],
+        "notas": "Siembra la semilla casi en la superficie (necesita luz para germinar) y mantenla húmeda. En octubre lo más práctico es comprar plantines y trasplantarlos."
+      },
+      "profundidadCm": [0.2, 0.5],
+      "distanciaCm": { "plantas": [25, 30], "hileras": [40, 50] },
+      "diasGerminacion": [14, 21],
+      "diasAlmacigo": [60, 75],
+      "diasFloracion": null,
+      "diasCosecha": [150, 180],
+      "ventanaCosechaDias": 45,
+      "sol": { "nivel": "medio", "texto": "Sol pleno o media sombra; en la costa tolera bien la semisombra." },
+      "riego": {
+        "texto": "Muy exigente: el suelo nunca debe secarse. La falta de agua deja las pencas fibrosas y huecas.",
+        "frecuencia": "Día por medio; a diario con calor",
+        "diasAlerta": 2
+      },
+      "companeras": ["tomate", "poroto-mata-baja", "Repollo", "Puerro"],
+      "incompatibles": ["choclo", "lechuga"],
+      "plagas": [
+        { "nombre": "Pulgón", "senal": "Colonias en el centro de la planta y hojas pegajosas.", "manejo": "Lava con agua o aplica jabón potásico." },
+        { "nombre": "Babosas y caracoles", "senal": "Pencas y hojas mordidas, rastros de baba.", "manejo": "Recolección nocturna y trampas con cerveza." },
+        { "nombre": "Septoriosis", "senal": "Manchas cafés con puntitos negros en las hojas, sobre todo con humedad.", "manejo": "Retira las hojas afectadas, riega al pie y deja espacio entre plantas." },
+        { "nombre": "Corazón negro", "senal": "Las hojas del centro se ennegrecen y se pudren.", "manejo": "Es falta de calcio por riego irregular: mantén la humedad pareja." }
+      ],
+      "senalesCosecha": [
+        "Pencas de unos 25 a 30 cm, firmes y crujientes.",
+        "Puedes cosechar pencas externas de a poco o la planta entera cortándola a ras de suelo.",
+        "Si las pencas se ven huecas o fibrosas, le faltó agua.",
+        "Cosecha antes de que aparezca el tallo floral."
+      ],
+      "consejos": [
+        "Para pencas más blancas y tiernas, envuelve las plantas con cartón o papel las últimas 2 o 3 semanas (blanqueado).",
+        "Agrega compost antes de trasplantar: es muy demandante de nutrientes.",
+        "Las hojas también sirven para caldos y sopas."
+      ]
+    },
+    {
+      "id": "cebolla",
+      "nombre": "Cebolla de guarda",
+      "nombreCorto": "Cebolla",
+      "nombreCientifico": "Allium cepa",
+      "icono": "🧅",
+      "descripcion": "Cebolla de día largo, la más cultivada en Chile. El bulbo se forma cuando los días se alargan en primavera: por eso se siembra en otoño y se cosecha en verano. Bien curada se guarda varios meses.",
+      "aviso": "Calendario aproximado: no hay un calendario oficial del INIA para el Biobío. Confírmalo con tu vivero o con INIA Quilamapu (Chillán).",
+      "siembra": {
+        "metodos": ["almacigo"],
+        "metodoRecomendado": "almacigo",
+        "mesesDirecta": [],
+        "mesesAlmacigo": [5, 6, 7],
+        "mesesTrasplante": [8, 9],
+        "notas": "En el centro-sur conviene almácigo y trasplante. Trasplanta cuando el plantín tenga 3 a 4 hojas, unos 15 cm de alto y el grosor de un lápiz. En invierno también se venden plantines."
+      },
+      "profundidadCm": [1, 1.5],
+      "distanciaCm": { "plantas": [8, 12], "hileras": [30, 40] },
+      "diasGerminacion": [8, 14],
+      "diasAlmacigo": [70, 90],
+      "diasFloracion": 150,
+      "diasCosecha": [200, 230],
+      "ventanaCosechaDias": 30,
+      "etiquetas": {
+        "floracion": { "nombre": "Formación de bulbo", "corto": "Bulbo", "texto": "El bulbo está engordando: riega parejo y deja de regar cuando las hojas empiecen a tumbarse." }
+      },
+      "sol": { "nivel": "pleno", "texto": "Pleno sol todo el día; con sombra el bulbo queda chico." },
+      "riego": {
+        "texto": "Riego regular y parejo durante el crecimiento. Suspende el riego cuando las hojas se tumban: así el bulbo madura y se conserva mejor.",
+        "frecuencia": "Cada 3 a 4 días en primavera",
+        "diasAlerta": 4
+      },
+      "companeras": ["tomate", "lechuga", "perejil", "Zanahoria", "Betarraga"],
+      "incompatibles": ["poroto-mata-baja", "poroto-enredadera", "Arveja"],
+      "plagas": [
+        { "nombre": "Trips", "senal": "Hojas con manchas plateadas o blanquecinas, sobre todo con calor seco.", "manejo": "Agua a presión o jabón potásico; evita que la planta pase sed." },
+        { "nombre": "Mildiú", "senal": "Manchas pálidas con pelusa gris violácea en las hojas cuando hay humedad.", "manejo": "Deja espacio entre plantas, riega al pie y no repitas cebolla en el mismo lugar al año siguiente." },
+        { "nombre": "Mosca de la cebolla", "senal": "Plantas que amarillean y se caen; larvas dentro del bulbo.", "manejo": "Rota el lugar de cultivo y no uses guano fresco." },
+        { "nombre": "Pudrición en la guarda", "senal": "Bulbos blandos desde el cuello durante el almacenaje.", "manejo": "Cura bien antes de guardar y almacena en un lugar seco y ventilado." }
+      ],
+      "senalesCosecha": [
+        "Más de la mitad de las hojas se tumban solas y empiezan a amarillear.",
+        "El cuello se ablanda y el bulbo muestra su piel seca y con color.",
+        "Arráncalas con el suelo seco y déjalas curar 1 a 2 semanas al sol o bajo techo ventilado.",
+        "Cuando el cuello está seco y cerrado, corta las hojas a 2 cm y guárdalas en un lugar seco."
+      ],
+      "consejos": [
+        "No entierres el plantín más hondo de lo que estaba en el almácigo.",
+        "Mantén la hilera libre de malezas: la cebolla compite mal.",
+        "Si quieres cebolla antes, existen variedades tempranas (de día corto) con otro calendario."
+      ]
+    },
+    {
+      "id": "ajo",
+      "nombre": "Ajo",
+      "nombreCorto": "Ajo",
+      "nombreCientifico": "Allium sativum",
+      "icono": "🧄",
+      "descripcion": "Se planta por dientes en otoño, crece durante el invierno y se cosecha a inicios del verano. Necesita el frío invernal para que la cabeza se divida en dientes.",
+      "aviso": "Calendario aproximado: no hay un calendario oficial del INIA para el Biobío. Confírmalo con tu vivero o con INIA Quilamapu (Chillán).",
+      "metodoTexto": {
+        "directa": "Plantación de dientes"
+      },
+      "siembra": {
+        "metodos": ["directa"],
+        "metodoRecomendado": "directa",
+        "mesesDirecta": [3, 4, 5],
+        "mesesAlmacigo": [],
+        "mesesTrasplante": [],
+        "notas": "Planta cada diente con la punta hacia arriba, sin pelar. Usa ajo de la zona o certificado: el ajo de supermercado o de zonas más cálidas puede «ramalear» (cabezas deformes) en el centro-sur."
+      },
+      "profundidadCm": [3, 5],
+      "distanciaCm": { "plantas": [10, 15], "hileras": [25, 30] },
+      "diasGerminacion": [10, 20],
+      "diasAlmacigo": null,
+      "diasFloracion": 150,
+      "diasCosecha": [210, 240],
+      "ventanaCosechaDias": 21,
+      "etiquetas": {
+        "germinacion": { "nombre": "Brotación", "corto": "Brota", "verbo": "brotar" },
+        "floracion": { "nombre": "Formación de bulbo", "corto": "Bulbo", "texto": "Se están formando los dientes. Si aparece un tallo floral (escapo), córtalo para que la energía vaya a la cabeza." }
+      },
+      "sol": { "nivel": "pleno", "texto": "Pleno sol y suelo suelto con buen drenaje." },
+      "riego": {
+        "texto": "Riego moderado: en invierno suele bastar la lluvia. Riega en primavera, mientras se forma la cabeza, y suspende 2 a 3 semanas antes de cosechar.",
+        "frecuencia": "Cada 5 a 7 días en primavera",
+        "diasAlerta": 7
+      },
+      "companeras": ["tomate", "perejil", "Frutilla", "Zanahoria", "Betarraga"],
+      "incompatibles": ["poroto-mata-baja", "poroto-enredadera", "Arveja"],
+      "plagas": [
+        { "nombre": "Roya", "senal": "Pústulas anaranjadas sobre las hojas, sobre todo en primavera húmeda.", "manejo": "Planta dientes sanos, deja espacio entre plantas y rota el lugar de cultivo." },
+        { "nombre": "Pudrición blanca", "senal": "Hojas que amarillean desde la punta y moho blanco en la base del bulbo.", "manejo": "Saca y elimina las plantas afectadas; no vuelvas a plantar ajo ni cebolla en ese lugar por varios años." },
+        { "nombre": "Trips", "senal": "Hojas con manchas plateadas.", "manejo": "Agua a presión o jabón potásico." },
+        { "nombre": "Ramaleo", "senal": "Cabezas deformes con brotes laterales y dientes sueltos.", "manejo": "Usa semilla adaptada a la zona centro-sur y no abuses del nitrógeno." }
+      ],
+      "senalesCosecha": [
+        "Entre un tercio y la mitad de las hojas inferiores están secas y amarillas.",
+        "Los dientes están bien formados y la piel firme (escarba una cabeza de prueba).",
+        "Arráncalos con el suelo seco y cúralos 2 a 3 semanas a la sombra, colgados en atados.",
+        "Si esperas demasiado, la cabeza se abre y se conserva peor."
+      ],
+      "consejos": [
+        "Guarda las cabezas más grandes para plantar la próxima temporada.",
+        "Mantén el suelo suelto y sin malezas.",
+        "El ajo chilote es otra especie, más grande y suave, con un ciclo parecido."
       ]
     }
   ]
